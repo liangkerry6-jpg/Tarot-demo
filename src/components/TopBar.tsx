@@ -14,13 +14,13 @@ export function TopBar() {
       <div className="max-w-7xl mx-auto flex justify-start items-center">
         <div className="flex flex-col items-start">
           <motion.h1
-            className="text-lg md:text-3xl font-bold text-goldAura tracking-wider"
+            className="text-base md:text-3xl font-bold text-goldAura tracking-wider"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             {t('appTitle')}
           </motion.h1>
           <motion.p
-            className="text-xs md:text-sm text-goldAura/60 tracking-widest"
+            className="text-[10px] md:text-sm text-goldAura/60 tracking-widest"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             {t('appSubtitle')}

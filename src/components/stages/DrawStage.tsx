@@ -17,15 +17,16 @@ function useResponsiveLayout() {
     cardH: 74,
     rowH: 78,
     yOffset: -110,
+    gap: 3,
   });
 
   useEffect(() => {
     const update = () => {
       const isMobile = window.innerWidth < 768;
       if (isMobile) {
-        setLayout({ cardsPerRow: 6, rows: 13, cardW: 44, cardH: 58, rowH: 62, yOffset: 0 });
+        setLayout({ cardsPerRow: 8, rows: 10, cardW: 64, cardH: 84, rowH: 85, yOffset: -60, gap: 6 });
       } else {
-        setLayout({ cardsPerRow: 20, rows: 4, cardW: 56, cardH: 74, rowH: 78, yOffset: -110 });
+        setLayout({ cardsPerRow: 20, rows: 4, cardW: 56, cardH: 74, rowH: 78, yOffset: -110, gap: 3 });
       }
     };
     update();
@@ -41,7 +42,7 @@ export function DrawStage({
   onSelectCard,
 }: DrawStageProps) {
   const { t } = useTranslation();
-  const { cardsPerRow, rows, cardW, cardH, rowH, yOffset } = useResponsiveLayout();
+  const { cardsPerRow, rows, cardW, cardH, rowH, yOffset, gap } = useResponsiveLayout();
 
   const positionLabels = [t('positionPast'), t('positionPresent'), t('positionFuture')];
 
@@ -54,9 +55,7 @@ export function DrawStage({
   const getRowLayout = (index: number) => {
     const row = Math.floor(index / cardsPerRow);
     const col = index % cardsPerRow;
-    const totalInRow = cardsPerRow;
-    const gap = 3;
-    const rowWidth = totalInRow * (cardW + gap);
+    const rowWidth = cardsPerRow * (cardW + gap);
     const startX = -rowWidth / 2;
     return {
       x: startX + col * (cardW + gap),
@@ -156,7 +155,7 @@ export function DrawStage({
       {/* Cards grid */}
       <div
         className="relative w-full max-w-[1400px] flex items-center justify-center overflow-visible"
-        style={{ height: gridHeight }}
+        style={{ height: gridHeight, minHeight: window.innerWidth < 768 ? 450 : undefined }}
       >
         <AnimatePresence>
           {availableCards.slice(0, rows * cardsPerRow).map((card, index) => {
