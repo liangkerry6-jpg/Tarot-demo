@@ -18,15 +18,31 @@ function useResponsiveLayout() {
     rowH: 78,
     yOffset: -110,
     gap: 3,
+    isMobile: false,
+    gridH: 340,
   });
 
   useEffect(() => {
     const update = () => {
       const isMobile = window.innerWidth < 768;
       if (isMobile) {
-        setLayout({ cardsPerRow: 8, rows: 10, cardW: 64, cardH: 84, rowH: 85, yOffset: -60, gap: 6 });
+        setLayout({
+          cardsPerRow: 6, rows: 13,
+          cardW: 48, cardH: 64,
+          rowH: 42, yOffset: -210,
+          gap: 6,
+          isMobile: true,
+          gridH: 520,
+        });
       } else {
-        setLayout({ cardsPerRow: 20, rows: 4, cardW: 56, cardH: 74, rowH: 78, yOffset: -110, gap: 3 });
+        setLayout({
+          cardsPerRow: 20, rows: 4,
+          cardW: 56, cardH: 74,
+          rowH: 78, yOffset: -110,
+          gap: 3,
+          isMobile: false,
+          gridH: 340,
+        });
       }
     };
     update();
@@ -42,7 +58,7 @@ export function DrawStage({
   onSelectCard,
 }: DrawStageProps) {
   const { t } = useTranslation();
-  const { cardsPerRow, rows, cardW, cardH, rowH, yOffset, gap } = useResponsiveLayout();
+  const { cardsPerRow, rows, cardW, cardH, rowH, yOffset, gap, isMobile, gridH } = useResponsiveLayout();
 
   const positionLabels = [t('positionPast'), t('positionPresent'), t('positionFuture')];
 
@@ -55,8 +71,8 @@ export function DrawStage({
   const getRowLayout = (index: number) => {
     const row = Math.floor(index / cardsPerRow);
     const col = index % cardsPerRow;
-    const rowWidth = cardsPerRow * (cardW + gap);
-    const startX = -rowWidth / 2;
+    const rowWidth = (cardsPerRow * cardW) + ((cardsPerRow - 1) * gap);
+    const startX = -(rowWidth / 2) + (isMobile ? 15 : 0);
     return {
       x: startX + col * (cardW + gap),
       y: row * rowH + yOffset,
@@ -64,10 +80,8 @@ export function DrawStage({
     };
   };
 
-  const gridHeight = rows * rowH + Math.abs(yOffset) + cardH;
-
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen px-2 md:px-4 py-2 md:py-4">
+    <div className="relative flex flex-col items-center justify-start md:justify-center min-h-screen px-2 md:px-4 pt-2 pb-2 md:py-4">
       <motion.h2
         initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
         className="text-lg md:text-2xl font-bold text-goldAura text-center mb-1 tracking-wider"
@@ -84,8 +98,16 @@ export function DrawStage({
         {t('drawProgress', { count: selectedCards.length })}
       </motion.p>
 
+      <motion.p
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+        className="text-goldAura/40 text-[10px] md:text-xs text-center mb-1"
+        style={{ fontFamily: "'Cinzel', serif" }}
+      >
+        {t('drawInstructionMouse')}
+      </motion.p>
+
       {/* Selection slots */}
-      <div className="flex gap-3 md:gap-10 mb-4 md:mb-6 pointer-events-none">
+      <div className="flex gap-3 md:gap-10 mb-1 md:mb-6 pointer-events-none">
         {[0, 1, 2].map((slotIndex) => (
           <motion.div
             key={slotIndex}
@@ -154,8 +176,8 @@ export function DrawStage({
 
       {/* Cards grid */}
       <div
-        className="relative w-full max-w-[1400px] flex items-center justify-center overflow-visible"
-        style={{ height: gridHeight, minHeight: window.innerWidth < 768 ? 450 : undefined }}
+        className={`relative w-full max-w-[1400px] flex items-center justify-center overflow-visible ${isMobile ? 'mt-2' : ''}`}
+        style={{ height: gridH }}
       >
         <AnimatePresence>
           {availableCards.slice(0, rows * cardsPerRow).map((card, index) => {
@@ -176,7 +198,7 @@ export function DrawStage({
                 animate={{
                   x: layout.x,
                   y: layout.y,
-                  scale: 1,
+                  scale: isMobile ? 0.9 : 1,
                   opacity: 1,
                   zIndex: layout.zIndex,
                 }}
@@ -218,13 +240,6 @@ export function DrawStage({
         </AnimatePresence>
       </div>
 
-      <motion.p
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-        className="text-goldAura/40 text-[10px] md:text-xs text-center mt-2 md:mt-4"
-        style={{ fontFamily: "'Cinzel', serif" }}
-      >
-        {t('drawInstructionMouse')}
-      </motion.p>
     </div>
   );
 }

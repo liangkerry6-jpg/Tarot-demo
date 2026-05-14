@@ -9,12 +9,12 @@ export function TopBar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 px-3 md:px-6 py-2 md:py-4"
+      className="fixed top-4 left-4 md:top-0 md:left-0 md:right-0 z-50 px-0 md:px-6 py-0 md:py-4"
     >
-      <div className="max-w-7xl mx-auto flex justify-start items-center">
-        <div className="flex flex-col items-start">
+      <div className="max-w-7xl mx-auto flex justify-start items-start">
+        <div className="flex flex-col items-start bg-darkSpace/60 md:bg-transparent rounded-lg md:rounded-none px-2 py-1 md:px-0 md:py-0">
           <motion.h1
-            className="text-base md:text-3xl font-bold text-goldAura tracking-wider"
+            className="text-sm md:text-3xl font-bold text-goldAura tracking-wider leading-tight"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             {t('appTitle')}
