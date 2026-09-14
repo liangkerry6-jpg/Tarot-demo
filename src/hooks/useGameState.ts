@@ -1,9 +1,10 @@
 import { useCallback, useReducer } from 'react';
 import { TarotCard, tarotCards, shuffleArray } from '../data/tarotData';
 import type { Intention } from '../data/contextualSummaries';
+import { getSpread, type SpreadId } from '../config/spreads';
 
 // Game stages
-export type GameStage = 'auth' | 'intention' | 'shuffling' | 'drawing' | 'revealing' | 'done';
+export type GameStage = 'auth' | 'intention' | 'spread' | 'shuffling' | 'drawing' | 'revealing' | 'done';
 
 export interface SelectedCard {
   card: TarotCard;
@@ -14,6 +15,7 @@ export interface SelectedCard {
 export interface GameState {
   stage: GameStage;
   intention: Intention | null;
+  spread: SpreadId | null;
   selectedCards: SelectedCard[];
   availableCards: TarotCard[];
   hoveredCardIndex: number | null;
@@ -26,6 +28,7 @@ export interface GameState {
 type GameAction =
   | { type: 'GO_TO_INTENTION' }
   | { type: 'SET_INTENTION'; intention: Intention }
+  | { type: 'SET_SPREAD'; spread: SpreadId }
   | { type: 'START_SHUFFLE' }
   | { type: 'UPDATE_SHUFFLE_PROGRESS'; progress: number }
   | { type: 'FINISH_SHUFFLE'; cards: TarotCard[] }
@@ -41,6 +44,7 @@ type GameAction =
 const initialState: GameState = {
   stage: 'auth',
   intention: null,
+  spread: null,
   selectedCards: [],
   availableCards: [],
   hoveredCardIndex: null,
@@ -63,7 +67,18 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         intention: action.intention,
+        stage: 'spread',
+      };
+
+    case 'SET_SPREAD':
+      return {
+        ...state,
+        spread: action.spread,
+        selectedCards: [],
+        availableCards: [],
         stage: 'shuffling',
+        shuffleProgress: 0,
+        error: null,
       };
 
     case 'START_SHUFFLE':
@@ -88,8 +103,10 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         shuffleProgress: 100,
       };
 
-    case 'SELECT_CARD':
-      if (state.selectedCards.length >= 3) return state;
+    case 'SELECT_CARD': {
+      const spread = getSpread(state.spread ?? 'timeFlow');
+      const maxCards = spread.cardCount;
+      if (state.selectedCards.length >= maxCards) return state;
       if (state.selectedCards.some(sc => sc.card.id === action.card.id)) return state;
 
       const isReversed = Math.random() > 0.5;
@@ -101,8 +118,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         selectedCards: newSelected,
         availableCards: newAvailable,
         hoveredCardIndex: null,
-        stage: newSelected.length === 3 ? 'revealing' : 'drawing',
+        stage: newSelected.length === maxCards ? 'revealing' : 'drawing',
       };
+    }
 
     case 'SET_HOVERED_CARD':
       return {
@@ -160,6 +178,10 @@ export function useGameState() {
     dispatch({ type: 'SET_INTENTION', intention });
   }, []);
 
+  const setSpread = useCallback((spread: SpreadId) => {
+    dispatch({ type: 'SET_SPREAD', spread });
+  }, []);
+
   const startShuffle = useCallback(() => {
     dispatch({ type: 'START_SHUFFLE' });
   }, []);
@@ -205,6 +227,7 @@ export function useGameState() {
     ...state,
     goToIntention,
     setIntention,
+    setSpread,
     startShuffle,
     updateShuffleProgress,
     finishShuffle,

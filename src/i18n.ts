@@ -25,6 +25,10 @@ const resources = {
       authPermissionRequest: '正在请求权限...',
       authPermissionDenied: '摄像头访问被拒绝，请在浏览器设置中启用。',
 
+      // Spread Stage
+      spreadTitle: '选择你的牌阵',
+      spreadSubtitle: '不同的牌阵，映照命运的不同切面',
+
       // Shuffle Stage
       shuffleTitle: '命运之轮转动',
       shuffleInstruction: '伸出食指，画圈唤醒卡牌',
@@ -42,7 +46,7 @@ const resources = {
       drawSlot: '第 {{number}} 张',
       drawCardSelected: '已选择',
       edgeSwipeHint: '向下滑动，收起牌面',
-      drawProgress: '已选 {{count}} / 3 张牌',
+      drawProgress: '已选 {{count}} / {{total}} 张牌',
 
       // Reveal Stage
       revealTitle: '命运揭示',

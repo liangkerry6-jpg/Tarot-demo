@@ -5,18 +5,20 @@ import { TopBar } from './components/TopBar';
 import { BackgroundFog } from './components/BackgroundFog';
 import { AuthStage } from './components/stages/AuthStage';
 import { IntentionStage } from './components/stages/IntentionStage';
+import { SpreadStage } from './components/stages/SpreadStage';
 import { ShuffleStage } from './components/stages/ShuffleStage';
 import { DrawStage } from './components/stages/DrawStage';
 import { RevealStage } from './components/stages/RevealStage';
 
 import { TarotCard } from './data/tarotData';
 import type { Intention } from './data/contextualSummaries';
+import type { SpreadId } from './config/spreads';
 import { useGameState } from './hooks/useGameState';
 
 function App() {
   const {
-    stage, intention, selectedCards, availableCards,
-    goToIntention, setIntention, finishShuffle, selectCard, restart,
+    stage, intention, spread, selectedCards, availableCards,
+    goToIntention, setIntention, setSpread, finishShuffle, selectCard, restart,
   } = useGameState();
 
   const handleAuthSuccess = useCallback(() => {
@@ -26,6 +28,10 @@ function App() {
   const handleSelectIntention = useCallback((intent: Intention) => {
     setIntention(intent);
   }, [setIntention]);
+
+  const handleSelectSpread = useCallback((id: SpreadId) => {
+    setSpread(id);
+  }, [setSpread]);
 
   const handleShuffleComplete = useCallback(() => {
     finishShuffle();
@@ -58,6 +64,12 @@ function App() {
             </motion.div>
           )}
 
+          {stage === 'spread' && (
+            <motion.div key="spread" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
+              <SpreadStage onSelectSpread={handleSelectSpread} />
+            </motion.div>
+          )}
+
           {stage === 'shuffling' && (
             <motion.div key="shuffling" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
               <ShuffleStage onShuffleComplete={handleShuffleComplete} />
@@ -67,6 +79,7 @@ function App() {
           {stage === 'drawing' && (
             <motion.div key="drawing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
               <DrawStage
+                spread={spread ?? 'timeFlow'}
                 availableCards={availableCards}
                 selectedCards={selectedCards}
                 onSelectCard={handleSelectCard}
@@ -77,6 +90,7 @@ function App() {
           {(stage === 'revealing' || stage === 'done') && (
             <motion.div key="revealing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
               <RevealStage
+                spread={spread ?? 'timeFlow'}
                 selectedCards={selectedCards}
                 intention={intention}
                 onRestart={handleRestart}
