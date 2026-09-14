@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import type { SelectedCard } from '../../hooks/useGameState';
-import type { Intention, ContextualSummaries, ContextualSummaryEn } from '../../data/contextualSummaries';
+import type { Intention } from '../../data/contextualSummaries';
 import { contextualSummaries } from '../../data/contextualSummaries';
 
 interface RevealStageProps {
@@ -22,7 +22,7 @@ const INTENTION_LABELS: Record<Intention, string> = {
 };
 
 export function RevealStage({ selectedCards, intention, onRestart }: RevealStageProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isExporting, setIsExporting] = useState(false);
   const [revealedCards, setRevealedCards] = useState<number[]>([]);
   const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
@@ -32,7 +32,6 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
   const exportRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const isZh = i18n.language === 'zh';
   const positionLabels = [t('positionPast'), t('positionPresent'), t('positionFuture')];
 
   useEffect(() => {
@@ -49,23 +48,15 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
     const summaries = contextualSummaries[sc.card.id];
     if (!summaries) return null;
     const side = sc.isReversed ? summaries.reversed : summaries.upright;
-    if (isZh) {
-      return (side as ContextualSummaries['upright'])[intention] || null;
-    }
-    const enKey = (intention + '_en') as keyof ContextualSummaryEn;
-    return (side as ContextualSummaryEn)[enKey] || null;
+    return side[intention] || null;
   };
 
   const getFullReading = (sc: SelectedCard) => {
-    if (sc.isReversed) {
-      return isZh ? sc.card.meaning_reversed_cn : sc.card.meaning_reversed_en;
-    }
-    return isZh ? sc.card.meaning_upright_cn : sc.card.meaning_upright_en;
+    if (sc.isReversed) return sc.card.meaning_reversed_cn;
+    return sc.card.meaning_upright_cn;
   };
 
-  const getCardName = (sc: SelectedCard) => {
-    return isZh ? sc.card.name_cn : sc.card.name_en;
-  };
+  const getCardName = (sc: SelectedCard) => sc.card.name_cn;
 
   const handleCardEnter = useCallback((sc: SelectedCard, instant = false) => {
     if (debounceLeaveRef.current) {
@@ -143,7 +134,7 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
         transition={{ repeat: Infinity, duration: 3 }}
         className="text-goldAura/60 text-sm md:text-base text-center mb-4 tracking-widest"
       >
-        {isZh ? '点击上方牌面，洞悉原始牌意...' : 'Click a card above to reveal its primal meaning...'}
+        点击上方牌面，洞悉原始牌意...
       </motion.p>
 
       {/* Exportable area */}
@@ -220,7 +211,7 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
                     >
                       <img
                         src={sc.card.image_url}
-                        alt={sc.card.name_en}
+                        alt={sc.card.name_cn}
                         className={`absolute inset-0 w-full h-full object-cover object-top ${sc.isReversed ? 'rotate-180' : ''}`}
                         crossOrigin="anonymous"
                         onError={(e) => {
@@ -309,7 +300,7 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
               <div className="relative w-full aspect-[3/4] max-h-[30vh] md:max-h-[30vh] overflow-hidden">
                 <img
                   src={expandedCardData.card.image_url}
-                  alt={expandedCardData.card.name_en}
+                  alt={expandedCardData.card.name_cn}
                   className={`w-full h-full object-contain ${expandedCardData.isReversed ? 'rotate-180' : ''}`}
                   crossOrigin="anonymous"
                 />
@@ -329,7 +320,7 @@ export function RevealStage({ selectedCards, intention, onRestart }: RevealStage
                              text-goldAura/70 hover:text-goldAura hover:border-goldAura/60
                              flex items-center justify-center
                              transition-colors duration-200 z-10"
-                  aria-label="Close"
+                  aria-label="关闭"
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <line x1="3" y1="3" x2="11" y2="11" />
