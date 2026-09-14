@@ -96,6 +96,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       };
 
     case 'FINISH_SHUFFLE':
+      // ShuffleStage 的残留定时器会多次回调 onShuffleComplete；
+      // 仅在仍处于洗牌阶段时才推进，忽略迟到的重复完成，避免把用户拉回 drawing。
+      if (state.stage !== 'shuffling') return state;
       return {
         ...state,
         stage: 'drawing',
