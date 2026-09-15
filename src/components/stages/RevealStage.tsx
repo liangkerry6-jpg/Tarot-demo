@@ -5,11 +5,9 @@ import { RotateCcw, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import type { SelectedCard } from '../../hooks/useGameState';
 import type { Intention } from '../../data/contextualSummaries';
-import { getSpread, type SpreadId, type ReadingSlot } from '../../config/spreads';
+import { getSpread, type SpreadId } from '../../config/spreads';
 import {
   generateLocalReading,
-  getCardInterpretation,
-  SLOT_LABELS,
   type ReadingPosition,
 } from '../../utils/readingEngine';
 
@@ -81,10 +79,6 @@ export function RevealStage({ spread, selectedCards, intention, onRestart }: Rev
     () => generateLocalReading(getSpread(spread), selectedCards),
     [spread, selectedCards],
   );
-
-  const expandedInterpretation = expandedData
-    ? getCardInterpretation(expandedData.cardId, expandedData.isReversed)
-    : null;
 
   useEffect(() => {
     setRevealedCards([]);
@@ -330,7 +324,7 @@ export function RevealStage({ spread, selectedCards, intention, onRestart }: Rev
 
       {/* Expanded card overlay */}
       <AnimatePresence>
-        {expandedData && expandedInterpretation && (
+        {expandedData && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center bg-darkSpace/85 backdrop-blur-sm p-4"
             initial={{ opacity: 0 }}
@@ -383,34 +377,28 @@ export function RevealStage({ spread, selectedCards, intention, onRestart }: Rev
               <div className="p-4 md:p-5 max-h-[50vh] md:max-h-[55vh] overflow-y-auto pb-6 md:pb-8">
                 <h3 className="text-goldAura text-lg font-bold tracking-wider mb-1 sticky top-0 bg-gradient-to-b from-mysticPurple to-transparent pt-1 -mt-1 pb-2"
                     style={{ fontFamily: "'Cinzel', serif" }}>
-                  {expandedInterpretation.nameCn}
+                  {expandedData.cardName}
                 </h3>
 
-                {expandedInterpretation.archetype && (
-                  <p className="text-goldAura/50 text-xs tracking-wider mb-2">
-                    原型 · {expandedInterpretation.archetype}
-                  </p>
+                <p className="text-goldAura/50 text-xs tracking-wider mb-2">
+                  <span className="text-goldAura/60">{expandedData.label}</span>
+                  <span className="mx-1.5 text-goldAura/30">·</span>
+                  {expandedData.archetype && `原型 · ${expandedData.archetype}`}
+                </p>
+
+                <KeywordChips keywords={expandedData.keywords} />
+
+                {expandedData.generalText && (
+                  <div className="rounded-lg bg-goldAura/5 border border-goldAura/15 p-3 md:p-4 mt-3">
+                    <h4 className="text-goldAura/80 text-xs md:text-sm font-semibold tracking-widest mb-1.5"
+                        style={{ fontFamily: "'Cinzel', 'Noto Serif SC', serif" }}>
+                      总述
+                    </h4>
+                    <p className="text-goldAura/85 text-xs md:text-sm leading-relaxed whitespace-pre-line">
+                      {expandedData.generalText}
+                    </p>
+                  </div>
                 )}
-
-                <KeywordChips keywords={expandedInterpretation.keywords} />
-
-                <div className="flex flex-col gap-3 mt-3">
-                  {Object.entries(SLOT_LABELS).map(([slot, label]) => {
-                    const text = expandedInterpretation.slots[slot as ReadingSlot];
-                    if (!text) return null;
-                    return (
-                      <div key={slot} className="rounded-lg bg-goldAura/5 border border-goldAura/15 p-2.5 md:p-3">
-                        <h4 className="text-goldAura/80 text-xs md:text-sm font-semibold tracking-widest mb-1"
-                            style={{ fontFamily: "'Cinzel', 'Noto Serif SC', serif" }}>
-                          {label}
-                        </h4>
-                        <p className="text-goldAura/75 text-xs md:text-sm leading-relaxed whitespace-pre-line">
-                          {text}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
                 <div className="h-4" />
               </div>
             </motion.div>

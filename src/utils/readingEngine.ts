@@ -33,7 +33,10 @@ export interface ReadingPosition {
   keywords: string[];
   imageUrl: string;
   isReversed: boolean;
+  // 对应线路（牌阵位置）的解读
   text: string;
+  // 牌面本身的「总述」核心含义（点开牌面后展示，与下方位置解读相区分）
+  generalText: string;
 }
 
 export interface LocalReading {
@@ -85,6 +88,7 @@ export function generateLocalReading(
       imageUrl: selected?.card.image_url ?? '',
       isReversed: selected?.isReversed ?? false,
       text: orientation?.[pos.slot] ?? '',
+      generalText: orientation?.general ?? '',
     };
   });
 
