@@ -6,17 +6,9 @@ export interface ContextualSummary {
   general: string;
 }
 
-export interface ContextualSummaryEn {
-  love_en: string;
-  career_en: string;
-  study_en: string;
-  social_en: string;
-  general_en: string;
-}
-
 export interface ContextualSummaries {
-  upright: ContextualSummary & ContextualSummaryEn;
-  reversed: ContextualSummary & ContextualSummaryEn;
+  upright: ContextualSummary;
+  reversed: ContextualSummary;
 }
 
 export type Intention = 'love' | 'career' | 'study' | 'social' | 'general';
@@ -24,91 +16,322 @@ export type Intention = 'love' | 'career' | 'study' | 'social' | 'general';
 export const contextualSummaries: Record<number, ContextualSummaries> = {
   // ===== MAJOR ARCANA (1-22) =====
   1: { // The Fool
-    upright: { love: "一段全新的恋情即将出现，请以开放的心态迎接未知的浪漫。", love_en: "A brand new romance is about to appear — embrace the unknown with an open heart.", career: "勇敢踏上新的职业道路，现在正是冒险和尝试的最佳时机。", career_en: "Bravely step onto a new career path; this is the perfect moment for risk and exploration.", study: "以初学者的心态拥抱新知识，不必担心起点的高低。", study_en: "Approach new knowledge with a beginner's mind — your starting point matters far less than your willingness to begin.", social: "放下顾虑结交新朋友，真诚的相遇将带来意想不到的温暖。", social_en: "Set aside your reservations and open yourself to new connections; sincere encounters bring unexpected warmth.", general: "新的旅程即将开启，带着信任和勇气迈向未知吧。", general_en: "A new journey is about to unfold. Step into the unknown with trust and courage." },
-    reversed: { love: "别让冲动遮蔽判断，放慢脚步审视这段感情的真实走向。", love_en: "Do not let impulse cloud your judgment — slow down and examine where this relationship is truly heading.", career: "避免盲目的职业跳跃，先稳固当下再考虑下一步。", career_en: "Avoid reckless career leaps; solidify your current position before planning your next move.", study: "浮躁的心态让你难以专注，先静下心来打牢基础。", study_en: "A restless mind prevents deep focus — quiet your thoughts and strengthen your foundation first.", social: "小心轻率的承诺，不要因一时兴起而疏远身边的人。", social_en: "Beware of careless promises; do not alienate those close to you on a fleeting whim.", general: "停下来审视方向，别让鲁莽代替了真正的勇气。", general_en: "Pause and reassess your direction — recklessness is not the same as true courage." },
+    upright: { love: "一段全新的恋情即将出现，请以开放的心态迎接未知的浪漫。", career: "勇敢踏上新的职业道路，现在正是冒险和尝试的最佳时机。", study: "以初学者的心态拥抱新知识，不必担心起点的高低。", social: "放下顾虑结交新朋友，真诚的相遇将带来意想不到的温暖。", general: "新的旅程即将开启，带着信任和勇气迈向未知吧。" },
+    reversed: { love: "别让冲动遮蔽判断，放慢脚步审视这段感情的真实走向。", career: "避免盲目的职业跳跃，先稳固当下再考虑下一步。", study: "浮躁的心态让你难以专注，先静下心来打牢基础。", social: "小心轻率的承诺，不要因一时兴起而疏远身边的人。", general: "停下来审视方向，别让鲁莽代替了真正的勇气。" },
   },
   2: { // The Magician
-    upright: { love: "你拥有创造理想关系的一切能力，主动表达心意将收获美好回应。", love_en: "You possess every ability needed to create your ideal relationship — express your heart openly and receive a beautiful response.", career: "专业技能和资源都已就位，现在是展现才华实现目标的时候。", career_en: "Your professional skills and resources are fully aligned — now is the time to showcase your talents and achieve your goals.", study: "你的专注力和领悟力正处巅峰，善用天赋攻克学习难关。", study_en: "Your focus and comprehension are at their peak — channel your gifts to conquer every learning challenge.", social: "以自信和魅力感染他人，你的真诚将成为连接彼此的桥梁。", social_en: "Inspire others with your confidence and magnetism; your sincerity will become the bridge that connects hearts.", general: "万事俱备，你的意志和行动力可以将想法化为现实。", general_en: "Everything is in place — your will and initiative can turn vision into reality." },
-    reversed: { love: "小心用魅力操控对方，真正的感情不需要技巧来维系。", love_en: "Beware of using charm to manipulate — true love needs no tricks to sustain itself.", career: "能力被浪费或误用，重新审视你的职业方向是否真正适合你。", career_en: "Your talents are being wasted or misapplied — reexamine whether your career direction truly suits you.", study: "聪明反被聪明误，踏实学习比投机取巧更可靠。", study_en: "Cleverness has become your own undoing — steady, honest study outlasts every shortcut.", social: "不要利用他人达成目的，真诚的关系容不得欺骗。", social_en: "Do not use others to achieve your ends; genuine relationships cannot survive deception.", general: "你的力量正被分散或滥用，回归本心找回真正的目标。", general_en: "Your power is being scattered or misused — return to your center and reclaim your true purpose." },
+    upright: { love: "你拥有创造理想关系的一切能力，主动表达心意将收获美好回应。", career: "专业技能和资源都已就位，现在是展现才华实现目标的时候。", study: "你的专注力和领悟力正处巅峰，善用天赋攻克学习难关。", social: "以自信和魅力感染他人，你的真诚将成为连接彼此的桥梁。", general: "万事俱备，你的意志和行动力可以将想法化为现实。" },
+    reversed: { love: "小心用魅力操控对方，真正的感情不需要技巧来维系。", career: "能力被浪费或误用，重新审视你的职业方向是否真正适合你。", study: "聪明反被聪明误，踏实学习比投机取巧更可靠。", social: "不要利用他人达成目的，真诚的关系容不得欺骗。", general: "你的力量正被分散或滥用，回归本心找回真正的目标。" },
   },
   3: { // The High Priestess
-    upright: { love: "倾听内心的声音，直觉会告诉你这段缘分的真相与方向。", love_en: "Listen to the voice within — your intuition already knows the truth and direction of this connection.", career: "暂时按兵不动，内在的智慧比外界的喧嚣更能指引你的职业道路。", career_en: "Hold your position for now; inner wisdom guides your career path far better than the noise of the world.", study: "深度思考胜过表面用功，向内探索将带来豁然开朗的顿悟。", study_en: "Deep reflection surpasses superficial effort — turn inward and breakthroughs will illuminate your path.", social: "保持适度的神秘感，不急于表达反而让人更想了解你。", social_en: "Preserve a touch of mystery; restraint in expression often draws others closer to know you.", general: "答案不在外界而在你的内心深处，静下来聆听潜意识的低语。", general_en: "The answers lie not in the outer world but in your depths — be still and listen to the whispers of your unconscious." },
-    reversed: { love: "被情绪淹没而失去判断，理智与感性的失衡让你看不清真相。", love_en: "Drowning in emotion has clouded your judgment — the imbalance of reason and feeling obscures the truth.", career: "忽视直觉的警告信号，继续走不适合的路只会消耗自己。", career_en: "You are ignoring your intuition's warning signs — persisting on an unsuitable path will only drain you.", study: "思绪混乱难以集中，先处理内心的杂音才能有效吸收知识。", study_en: "Mental chaos prevents concentration — quiet the inner noise before you can truly absorb knowledge.", social: "过度封闭或过度倾诉都会伤害关系，寻找适度的平衡点。", social_en: "Both excessive withdrawal and excessive disclosure harm relationships — seek the balanced middle ground.", general: "内心正在发出警报你却没有听见，停下来面对被压抑的真实感受。", general_en: "Your psyche is sounding an alarm you refuse to hear — stop and face the feelings you have been suppressing." },
+    upright: { love: "倾听内心的声音，直觉会告诉你这段缘分的真相与方向。", career: "暂时按兵不动，内在的智慧比外界的喧嚣更能指引你的职业道路。", study: "深度思考胜过表面用功，向内探索将带来豁然开朗的顿悟。", social: "保持适度的神秘感，不急于表达反而让人更想了解你。", general: "答案不在外界而在你的内心深处，静下来聆听潜意识的低语。" },
+    reversed: { love: "被情绪淹没而失去判断，理智与感性的失衡让你看不清真相。", career: "忽视直觉的警告信号，继续走不适合的路只会消耗自己。", study: "思绪混乱难以集中，先处理内心的杂音才能有效吸收知识。", social: "过度封闭或过度倾诉都会伤害关系，寻找适度的平衡点。", general: "内心正在发出警报你却没有听见，停下来面对被压抑的真实感受。" },
   },
   4: { // The Empress
-    upright: { love: "感情进入丰收期，用温柔和耐心滋养这段关系让它自然生长。", love_en: "Your love life enters a season of abundance — nurture this relationship with gentleness and patience, letting it grow naturally.", career: "你的创意和努力即将开花结果，享受创造带来的成就感。", career_en: "Your creativity and hard work are about to bear fruit — savor the fulfillment that creation brings.", study: "在舒适的环境中学习效率倍增，让好奇心引领你的成长。", study_en: "Learning flourishes in a nurturing environment — let curiosity lead your growth.", social: "以包容和温暖吸引他人，你自然散发的亲和力是最好的社交礼物。", social_en: "Draw others in with warmth and acceptance — your natural亲和力 is the finest social gift you can offer.", general: "生命正在丰盛地展开，接纳美好并慷慨地与世界分享你的光芒。", general_en: "Life is unfolding in abundance — receive its beauty and generously share your light with the world." },
-    reversed: { love: "过度付出导致疲惫，学会在关系中设立边界保护自己的能量。", love_en: "Over-giving has left you exhausted — learn to set boundaries in relationships to protect your energy.", career: "创作瓶颈让你焦虑，不妨暂时放下，灵感会在放松时回归。", career_en: "Creative block is fueling your anxiety — step away for a while; inspiration returns when you relax.", study: "对成果的过度执着反而阻碍了进步，享受学习过程本身。", study_en: "Fixation on results is blocking your progress — learn to enjoy the process of learning itself.", social: "依赖关系让你失去自我，重新找回独立的价值和力量。", social_en: "Over-dependence on relationships has cost you your sense of self — reclaim your independent worth and strength.", general: "能量枯竭是时候好好滋养自己了，你无法从空杯中倒出水来。", general_en: "Your reserves are depleted — it is time to nourish yourself. You cannot pour from an empty cup." },
+    upright: { love: "感情进入丰收期，用温柔和耐心滋养这段关系让它自然生长。", career: "你的创意和努力即将开花结果，享受创造带来的成就感。", study: "在舒适的环境中学习效率倍增，让好奇心引领你的成长。", social: "以包容和温暖吸引他人，你自然散发的亲和力是最好的社交礼物。", general: "生命正在丰盛地展开，接纳美好并慷慨地与世界分享你的光芒。" },
+    reversed: { love: "过度付出导致疲惫，学会在关系中设立边界保护自己的能量。", career: "创作瓶颈让你焦虑，不妨暂时放下，灵感会在放松时回归。", study: "对成果的过度执着反而阻碍了进步，享受学习过程本身。", social: "依赖关系让你失去自我，重新找回独立的价值和力量。", general: "能量枯竭是时候好好滋养自己了，你无法从空杯中倒出水来。" },
   },
   5: { // The Emperor
-    upright: { love: "用成熟和责任感经营感情，稳定的承诺比浪漫的激情更持久。", love_en: "Lead your relationship with maturity and responsibility — steady commitment outlasts romantic passion.", career: "建立清晰的职业规划和纪律，你的领导力将获得认可和回报。", career_en: "Establish clear career plans and discipline — your leadership will earn recognition and reward.", study: "制定系统化的学习计划，自律和结构将带来扎实的进步。", study_en: "Create a systematic study plan — discipline and structure will bring solid, lasting progress.", social: "以可靠和正直赢得尊重，成为他人可以信赖的坚实后盾。", social_en: "Earn respect through reliability and integrity — become the steady anchor others can count on.", general: "秩序和规则是你此刻最需要的武器，用理性构筑稳固的根基。", general_en: "Order and structure are the weapons you need most right now — build a solid foundation with reason." },
-    reversed: { love: "控制欲正在侵蚀亲密关系，爱需要空间而非独裁式的掌控。", love_en: "The need for control is eroding your intimacy — love requires space, not authoritarian dominion.", career: "滥用权威或抗拒必要的规则，这两种极端都会损害你的职业声誉。", career_en: "Whether abusing authority or resisting necessary rules, both extremes will damage your professional reputation.", study: "过于僵化的学习方式正在扼杀创造力，适当灵活变通。", study_en: "Rigid study habits are suffocating your creativity — allow for flexibility and adaptation.", social: "专横的态度正在推开身边的人，学会尊重他人的边界和选择。", social_en: "A domineering attitude is pushing people away — learn to respect the boundaries and choices of others.", general: "要么过于严苛要么缺乏自律，找回平衡的权威感才是关键。", general_en: "Whether overly harsh or lacking self-discipline, the key lies in recovering a balanced sense of authority." },
+    upright: { love: "用成熟和责任感经营感情，稳定的承诺比浪漫的激情更持久。", career: "建立清晰的职业规划和纪律，你的领导力将获得认可和回报。", study: "制定系统化的学习计划，自律和结构将带来扎实的进步。", social: "以可靠和正直赢得尊重，成为他人可以信赖的坚实后盾。", general: "秩序和规则是你此刻最需要的武器，用理性构筑稳固的根基。" },
+    reversed: { love: "控制欲正在侵蚀亲密关系，爱需要空间而非独裁式的掌控。", career: "滥用权威或抗拒必要的规则，这两种极端都会损害你的职业声誉。", study: "过于僵化的学习方式正在扼杀创造力，适当灵活变通。", social: "专横的态度正在推开身边的人，学会尊重他人的边界和选择。", general: "要么过于严苛要么缺乏自律，找回平衡的权威感才是关键。" },
   },
   6: { // The Hierophant
-    upright: { love: "传统的承诺和仪式感将加深你们的羁绊，考虑更正式的关系确认。", love_en: "Traditional commitment and shared ritual will deepen your bond — consider a more formal affirmation of your relationship.", career: "寻求前辈的指导或遵循已验证的路径，传统智慧是你最好的导航。", career_en: "Seek guidance from mentors or follow proven paths — traditional wisdom is your best navigator.", study: "系统化的教育和正统的学习方法将带来扎实的知识积累。", study_en: "Systematic education and orthodox learning methods will bring solid knowledge accumulation.", social: "参与有意义的集体活动，在共享价值观的基础上建立深厚友谊。", social_en: "Participate in meaningful group activities — deep friendships are built on shared values.", general: "遵循内心的信仰和传统智慧，它们是你迷茫时最可靠的指引。", general_en: "Follow your inner faith and inherited wisdom — they are your most reliable guides in times of confusion." },
-    reversed: { love: "打破陈旧的关系模式，不被世俗眼光定义什么才是正确的爱情。", love_en: "Break free from outdated relationship patterns — do not let convention define what love should be.", career: "挑战过时的职场规则，创新和独立思维将开辟属于你的道路。", career_en: "Challenge obsolete workplace norms — innovation and independent thinking will carve your own path.", study: "不拘泥于传统学习方法，探索更适合你自己的学习路径。", study_en: "Do not be bound by traditional study methods — explore the learning path that truly fits you.", social: "不必迎合所有人的期望，做真实的自己才能吸引对的人。", social_en: "Stop catering to everyone's expectations — only by being your authentic self will you attract the right people.", general: "是时候质疑那些不再服务于你的旧信念，找到属于自己的真理。", general_en: "It is time to question old beliefs that no longer serve you — find the truth that is truly your own." },
+    upright: { love: "传统的承诺和仪式感将加深你们的羁绊，考虑更正式的关系确认。", career: "寻求前辈的指导或遵循已验证的路径，传统智慧是你最好的导航。", study: "系统化的教育和正统的学习方法将带来扎实的知识积累。", social: "参与有意义的集体活动，在共享价值观的基础上建立深厚友谊。", general: "遵循内心的信仰和传统智慧，它们是你迷茫时最可靠的指引。" },
+    reversed: { love: "打破陈旧的关系模式，不被世俗眼光定义什么才是正确的爱情。", career: "挑战过时的职场规则，创新和独立思维将开辟属于你的道路。", study: "不拘泥于传统学习方法，探索更适合你自己的学习路径。", social: "不必迎合所有人的期望，做真实的自己才能吸引对的人。", general: "是时候质疑那些不再服务于你的旧信念，找到属于自己的真理。" },
   },
   7: { // The Lovers
-    upright: { love: "灵魂深处的连接正在发生，这是做出真心选择的关键时刻。", love_en: "A soul-deep connection is unfolding — this is the crucial moment to make a heartfelt choice.", career: "追随内心的热爱选择职业方向，当你热爱所做之事成功自会到来。", career_en: "Follow your inner passion in choosing your career direction — when you love what you do, success follows naturally.", study: "找到你真正热爱的学科领域，热情将成为最强大的学习动力。", study_en: "Find the subject you truly love — passion will become your most powerful engine for learning.", social: "基于真诚和共同价值观的关系将深化，珍惜那些心灵相通的人。", social_en: "Relationships grounded in sincerity and shared values will deepen — treasure those who resonate with your soul.", general: "你正站在重要的十字路口，听从内心最真实的声音做出选择。", general_en: "You stand at a significant crossroads — listen to the truest voice within and choose accordingly." },
-    reversed: { love: "价值观的不合正在制造裂痕，坦诚面对分歧而非逃避才是解决之道。", love_en: "Clashing values are creating fractures — face your differences honestly rather than avoiding them.", career: "在多个选项间举棋不定，理清什么对你真正重要再做决定。", career_en: "You are wavering between options — clarify what truly matters to you before deciding.", study: "对所选方向产生怀疑，重新审视这是否是你真正想要的道路。", study_en: "Doubt about your chosen direction is surfacing — reexamine whether this is truly the path you want.", social: "关系中的不和谐反映出你内心的矛盾，先与自己和解。", social_en: "Disharmony in your relationships mirrors your inner conflict — make peace with yourself first.", general: "犹豫不决正在消耗你的能量，面对内心的冲突勇敢做出抉择。", general_en: "Indecision is draining your energy — face your inner conflict and make a courageous choice." },
+    upright: { love: "灵魂深处的连接正在发生，这是做出真心选择的关键时刻。", career: "追随内心的热爱选择职业方向，当你热爱所做之事成功自会到来。", study: "找到你真正热爱的学科领域，热情将成为最强大的学习动力。", social: "基于真诚和共同价值观的关系将深化，珍惜那些心灵相通的人。", general: "你正站在重要的十字路口，听从内心最真实的声音做出选择。" },
+    reversed: { love: "价值观的不合正在制造裂痕，坦诚面对分歧而非逃避才是解决之道。", career: "在多个选项间举棋不定，理清什么对你真正重要再做决定。", study: "对所选方向产生怀疑，重新审视这是否是你真正想要的道路。", social: "关系中的不和谐反映出你内心的矛盾，先与自己和解。", general: "犹豫不决正在消耗你的能量，面对内心的冲突勇敢做出抉择。" },
   },
   8: { // The Chariot
-    upright: { love: "克服障碍赢得心上人的青睐，坚定的行动力将带你抵达爱情的彼岸。", love_en: "Overcome every obstacle to win the heart you desire — determined action will carry you to love's shore.", career: "强大的竞争力和决心助你脱颖而出，全力以赴冲刺职业目标。", career_en: "Fierce competitiveness and resolve will help you stand out — go all-in on your career goals.", study: "克服分心和拖延，集中精力高效攻克学业难关。", study_en: "Conquer distraction and procrastination — focus your energy to efficiently overcome every academic challenge.", social: "在不同的人际关系中找到平衡，驾驭复杂的社交局面游刃有余。", social_en: "Find balance across different relationships and navigate complex social dynamics with ease.", general: "胜利在望但需要你全神贯注，驾驭内心的驱动力向前冲刺。", general_en: "Victory is within sight but demands your full focus — harness your inner drive and surge forward." },
-    reversed: { love: "过于强势的态度正在伤害关系，学会妥协和柔软比赢得争论更重要。", love_en: "An overly aggressive stance is harming your relationship — learning to compromise matters more than winning the argument.", career: "方向混乱导致精力分散，先明确目标再全力出击才有效。", career_en: "Scattered direction is fragmenting your energy — clarify your target before you strike with full force.", study: "急于求成反而欲速不达，平衡好学习节奏才能持续进步。", study_en: "Haste is making you stumble — balance your study rhythm for sustainable progress.", social: "在人际冲突中不顾他人感受硬碰硬只会两败俱伤。", social_en: "Meeting conflict with brute force while ignoring others' feelings only leaves both sides wounded.", general: "失控的野心正在让你偏离轨道，重新握紧缰绳找回方向感。", general_en: "Unchecked ambition is pulling you off course — tighten your grip on the reins and reclaim your direction." },
+    upright: { love: "克服障碍赢得心上人的青睐，坚定的行动力将带你抵达爱情的彼岸。", career: "强大的竞争力和决心助你脱颖而出，全力以赴冲刺职业目标。", study: "克服分心和拖延，集中精力高效攻克学业难关。", social: "在不同的人际关系中找到平衡，驾驭复杂的社交局面游刃有余。", general: "胜利在望但需要你全神贯注，驾驭内心的驱动力向前冲刺。" },
+    reversed: { love: "过于强势的态度正在伤害关系，学会妥协和柔软比赢得争论更重要。", career: "方向混乱导致精力分散，先明确目标再全力出击才有效。", study: "急于求成反而欲速不达，平衡好学习节奏才能持续进步。", social: "在人际冲突中不顾他人感受硬碰硬只会两败俱伤。", general: "失控的野心正在让你偏离轨道，重新握紧缰绳找回方向感。" },
   },
   9: { // Strength
-    upright: { love: "以温柔和耐心化解关系中的矛盾，真正的力量来自内心的柔软。", love_en: "Dissolve conflict in your relationship with gentleness and patience — true strength arises from inner tenderness.", career: "用韧性和内在的自信面对职场挑战，从容不迫的态度就是你的力量。", career_en: "Face workplace challenges with resilience and quiet confidence — your composure is your greatest power.", study: "面对困难学科保持耐心和毅力，温柔地坚持比硬拼更有效。", study_en: "Approach difficult subjects with patience and perseverance — gentle persistence is more effective than brute force.", social: "以善意和理解化解人际冲突，温柔的力量比强势更令人信服。", social_en: "Resolve interpersonal friction with kindness and understanding — gentle strength persuades far more than force.", general: "你拥有面对一切的内在力量，温柔而坚定地走过眼下的挑战。", general_en: "You possess the inner strength to face anything — walk through present challenges with gentle determination." },
-    reversed: { love: "情绪失控正在伤害你和伴侣，找回内心的平静才能修复关系。", love_en: "Emotional outbursts are wounding both you and your partner — reclaim inner calm to begin the repair.", career: "自我怀疑侵蚀了你的信心，你比自己想象的更有能力和力量。", career_en: "Self-doubt is eroding your confidence — you are far more capable and powerful than you imagine.", study: "遇到挫折就想要放弃，重新点燃内心的勇气之火继续前行。", study_en: "The urge to quit at the first setback — rekindle the fire of courage within and press on.", social: "不安和焦虑让你在人际关系中表现失常，先安抚好内心的野兽。", social_en: "Anxiety and insecurity are distorting your social interactions — soothe the inner beast before engaging others.", general: "你正在被恐惧和自我怀疑消耗，唤醒沉睡的内在力量重新站起。", general_en: "Fear and self-doubt are draining you — awaken your dormant inner strength and rise again." },
+    upright: { love: "以温柔和耐心化解关系中的矛盾，真正的力量来自内心的柔软。", career: "用韧性和内在的自信面对职场挑战，从容不迫的态度就是你的力量。", study: "面对困难学科保持耐心和毅力，温柔地坚持比硬拼更有效。", social: "以善意和理解化解人际冲突，温柔的力量比强势更令人信服。", general: "你拥有面对一切的内在力量，温柔而坚定地走过眼下的挑战。" },
+    reversed: { love: "情绪失控正在伤害你和伴侣，找回内心的平静才能修复关系。", career: "自我怀疑侵蚀了你的信心，你比自己想象的更有能力和力量。", study: "遇到挫折就想要放弃，重新点燃内心的勇气之火继续前行。", social: "不安和焦虑让你在人际关系中表现失常，先安抚好内心的野兽。", general: "你正在被恐惧和自我怀疑消耗，唤醒沉睡的内在力量重新站起。" },
   },
   10: { // The Hermit
-    upright: { love: "暂时的独处让你更清楚自己需要什么样的伴侣，沉淀后再出发。", love_en: "Temporary solitude clarifies what you truly need in a partner — settle inward, then begin anew.", career: "深入反思你的职业使命，寻找真正有意义而非仅仅有利的工作方向。", career_en: "Reflect deeply on your career calling — seek work that is truly meaningful, not merely profitable.", study: "独自深入钻研才能触及学问的精髓，享受孤独带来的专注力。", study_en: "Only solitary deep study can touch the essence of knowledge — relish the focus that solitude brings.", social: "减少无效社交，专注于少数有深度的一对一交流更有价值。", social_en: "Reduce shallow socializing and invest in a few deep, one-on-one connections — quality over quantity.", general: "向内探索的时刻到了，在安静中寻找属于你自己的答案和方向。", general_en: "The time for inner exploration has come — in stillness, find the answers and direction that are truly your own." },
-    reversed: { love: "过度的孤立让你错过了可能的缘分，适当打开心门迎接相遇。", love_en: "Excessive isolation is causing you to miss potential connections — open your heart's door to welcome encounter.", career: "固步自封让你与行业脱节，走出舒适区重新连接外面的世界。", career_en: "Self-imposed isolation has disconnected you from your field — step out of your comfort zone and reconnect.", study: "闭门造车只会走入死胡同，寻求导师的指引能帮你突破瓶颈。", study_en: "Studying in complete isolation leads only to dead ends — seek a mentor's guidance to break through.", social: "孤独变成了逃避的借口，重新走出门去与人建立真实的联系。", social_en: "Loneliness has become an excuse to hide — go out again and build genuine human connections.", general: "你的自我隔离已经太久，是时候重新与世界分享你的光芒了。", general_en: "You have been isolated for too long — it is time to share your light with the world once more." },
+    upright: { love: "暂时的独处让你更清楚自己需要什么样的伴侣，沉淀后再出发。", career: "深入反思你的职业使命，寻找真正有意义而非仅仅有利的工作方向。", study: "独自深入钻研才能触及学问的精髓，享受孤独带来的专注力。", social: "减少无效社交，专注于少数有深度的一对一交流更有价值。", general: "向内探索的时刻到了，在安静中寻找属于你自己的答案和方向。" },
+    reversed: { love: "过度的孤立让你错过了可能的缘分，适当打开心门迎接相遇。", career: "固步自封让你与行业脱节，走出舒适区重新连接外面的世界。", study: "闭门造车只会走入死胡同，寻求导师的指引能帮你突破瓶颈。", social: "孤独变成了逃避的借口，重新走出门去与人建立真实的联系。", general: "你的自我隔离已经太久，是时候重新与世界分享你的光芒了。" },
   },
   11: { // Wheel of Fortune
-    upright: { love: "命运正在安排一场奇妙的相遇或关系的转折，顺应天意不要抗拒。", love_en: "Destiny is orchestrating a wondrous encounter or a turning point in your relationship — flow with it, do not resist.", career: "幸运的机会正在靠近，做好准备抓住命运之轮转动的关键时刻。", career_en: "A fortunate opportunity is approaching — prepare yourself to seize the pivotal moment when the Wheel turns.", study: "学习的节奏正在加快，顺势而为将取得超出预期的进步。", study_en: "Your learning rhythm is accelerating — ride the momentum and you will exceed your own expectations.", social: "生命中将出现重要的人，敞开心扉迎接命运安排的缘分。", social_en: "Significant people are about to enter your life — open your heart to the connections fate has arranged.", general: "命运之轮正在转向有利的方向，保持觉察迎接即将到来的好运。", general_en: "The Wheel of Fortune is turning in your favor — stay aware and welcome the good fortune approaching." },
-    reversed: { love: "感情遇到周期性低谷，这只是暂时的阶段而非最终结局。", love_en: "Your love life has entered a cyclical low — this is a temporary phase, not the final outcome.", career: "不受控制的变动让你措手不及，接受无常并从中找到新的机会。", career_en: "Uncontrollable changes have caught you off guard — accept impermanence and discover new openings within it.", study: "学习进度遭遇瓶颈期，耐心等待这波低谷过去就会有转机。", study_en: "Your studies have hit a plateau — wait patiently for this trough to pass and the turning point will come.", social: "人际关系中的变动令人不安，但这正是筛选真朋友的好时机。", social_en: "Shifting social dynamics feel unsettling — but this is the perfect time to discern who your true friends are.", general: "坏运气只是暂时的轮回，从挫折中学习为下一轮上升做准备。", general_en: "Bad luck is only a temporary turn of the wheel — learn from setbacks and prepare for the next rise." },
+    upright: { love: "命运正在安排一场奇妙的相遇或关系的转折，顺应天意不要抗拒。", career: "幸运的机会正在靠近，做好准备抓住命运之轮转动的关键时刻。", study: "学习的节奏正在加快，顺势而为将取得超出预期的进步。", social: "生命中将出现重要的人，敞开心扉迎接命运安排的缘分。", general: "命运之轮正在转向有利的方向，保持觉察迎接即将到来的好运。" },
+    reversed: { love: "感情遇到周期性低谷，这只是暂时的阶段而非最终结局。", career: "不受控制的变动让你措手不及，接受无常并从中找到新的机会。", study: "学习进度遭遇瓶颈期，耐心等待这波低谷过去就会有转机。", social: "人际关系中的变动令人不安，但这正是筛选真朋友的好时机。", general: "坏运气只是暂时的轮回，从挫折中学习为下一轮上升做准备。" },
   },
   12: { // Justice
-    upright: { love: "关系中的付出与回报将趋于平衡，公正地看待彼此的贡献与需求。", love_en: "Give and take in your relationship are finding equilibrium — see each other's contributions and needs with fairness.", career: "你的努力将获得公平的回报，法律或合约相关事宜有良好结果。", career_en: "Your efforts will receive fair reward — legal and contractual matters will resolve favorably.", study: "客观评估自己的学习成果，诚实面对不足才能取得真正的进步。", study_en: "Objectively assess your learning outcomes — only by honestly facing your gaps can you make genuine progress.", social: "以公平公正的态度处理人际纠纷，你的正直将赢得各方尊重。", social_en: "Handle interpersonal disputes with fairness and impartiality — your integrity will earn respect from all sides.", general: "种瓜得瓜种豆得豆，此刻的结果正是你过去行为的公正反映。", general_en: "You reap what you have sown — the present outcome is the just reflection of your past actions." },
-    reversed: { love: "关系中的不平衡正在加剧，诚实地面对你付出或索取过多的问题。", love_en: "Imbalance in your relationship is intensifying — honestly face whether you are giving or taking too much.", career: "不公正的待遇让你感到沮丧，冷静收集证据用理性而非情绪维权。", career_en: "Unfair treatment is wearing you down — calmly gather evidence and defend your rights with reason, not rage.", study: "逃避对自己学习成果的诚实评估只会让问题恶化。", study_en: "Avoiding an honest assessment of your learning only worsens the problem.", social: "偏袒和不公正在你的社交圈中制造裂痕，客观公正地处理。", social_en: "Favoritism and injustice are creating rifts in your social circle — address them with objectivity and fairness.", general: "不公平的结果让你愤怒，但逃避责任或怨天尤人都无济于事。", general_en: "Unfair outcomes enrage you — but evading responsibility or blaming the world accomplishes nothing." },
+    upright: { love: "关系中的付出与回报将趋于平衡，公正地看待彼此的贡献与需求。", career: "你的努力将获得公平的回报，法律或合约相关事宜有良好结果。", study: "客观评估自己的学习成果，诚实面对不足才能取得真正的进步。", social: "以公平公正的态度处理人际纠纷，你的正直将赢得各方尊重。", general: "种瓜得瓜种豆得豆，此刻的结果正是你过去行为的公正反映。" },
+    reversed: { love: "关系中的不平衡正在加剧，诚实地面对你付出或索取过多的问题。", career: "不公正的待遇让你感到沮丧，冷静收集证据用理性而非情绪维权。", study: "逃避对自己学习成果的诚实评估只会让问题恶化。", social: "偏袒和不公正在你的社交圈中制造裂痕，客观公正地处理。", general: "不公平的结果让你愤怒，但逃避责任或怨天尤人都无济于事。" },
   },
   13: { // The Hanged Man
-    upright: { love: "暂停追逐让关系自然呼吸，换个角度看问题会让你有全新的领悟。", love_en: "Pause the chase and let the relationship breathe — a shift in perspective will bring fresh insight.", career: "暂时的停滞期并非坏事，利用这段时间重新审视职业方向。", career_en: "A temporary standstill is not a bad thing — use this time to reexamine your career direction.", study: "放下急切的求知欲安静等待，灵感会在你不强求时悄然降临。", study_en: "Release the urgent need to know and wait quietly — inspiration arrives when you stop forcing it.", social: "退一步观察人际互动的模式，你会有更深刻的觉察和理解。", social_en: "Step back and observe the patterns in your interactions — deeper awareness and understanding will emerge.", general: "看似停滞的处境其实是转化前的酝酿，臣服于当下等待洞见浮现。", general_en: "What looks like stagnation is actually the gestation before transformation — surrender to the present and await the insight rising." },
-    reversed: { love: "拒绝放手让你困在痛苦的关系中，接受改变是解脱的开始。", love_en: "Refusing to let go keeps you trapped in suffering — accepting change is the beginning of liberation.", career: "挣扎和抗拒只会延长痛苦期，顺势而为比逆流而上更明智。", career_en: "Struggling and resisting only prolongs the pain — moving with the current is wiser than fighting upstream.", study: "不愿改变旧有学习方法让你停滞不前，尝试新视角突破困境。", study_en: "Unwillingness to change old study methods keeps you stuck — try a new perspective to break through.", social: "固执己见正在破坏你的人际关系，学会从他人的角度看待问题。", social_en: "Stubborn self-righteousness is damaging your relationships — learn to see things from others' points of view.", general: "你在抗拒必要的转变，越是挣扎越难看清前路，不如先停下来。", general_en: "You are resisting a necessary transformation — the more you struggle, the harder it is to see ahead. Stop, first." },
+    upright: { love: "暂停追逐让关系自然呼吸，换个角度看问题会让你有全新的领悟。", career: "暂时的停滞期并非坏事，利用这段时间重新审视职业方向。", study: "放下急切的求知欲安静等待，灵感会在你不强求时悄然降临。", social: "退一步观察人际互动的模式，你会有更深刻的觉察和理解。", general: "看似停滞的处境其实是转化前的酝酿，臣服于当下等待洞见浮现。" },
+    reversed: { love: "拒绝放手让你困在痛苦的关系中，接受改变是解脱的开始。", career: "挣扎和抗拒只会延长痛苦期，顺势而为比逆流而上更明智。", study: "不愿改变旧有学习方法让你停滞不前，尝试新视角突破困境。", social: "固执己见正在破坏你的人际关系，学会从他人的角度看待问题。", general: "你在抗拒必要的转变，越是挣扎越难看清前路，不如先停下来。" },
   },
   14: { // Death
-    upright: { love: "旧有关系模式的终结为新感情腾出空间，勇敢放手迎接蜕变。", love_en: "The end of old relationship patterns makes space for new love — let go bravely and welcome transformation.", career: "一段职业生涯即将结束，这为更适合你的新机会创造了条件。", career_en: "One career chapter is closing — this creates the conditions for a new opportunity better suited to you.", study: "旧的学习方式已经不适用了，拥抱全新的方法和思维模式。", study_en: "Old ways of learning no longer serve you — embrace entirely new methods and mindsets.", social: "某些关系自然走到终点，感恩过去然后轻盈地继续前行。", social_en: "Some relationships are naturally reaching their end — give thanks for the past and move forward lightly.", general: "深刻的转变正在发生，松开紧握旧事物的手拥抱全新的开始。", general_en: "A profound transformation is underway — release your grip on the old and embrace a brand new beginning." },
-    reversed: { love: "死守已死的关系只会延长痛苦，放手的时刻早已到来。", love_en: "Clutching a dead relationship only prolongs the pain — the time to let go arrived long ago.", career: "害怕改变让你困在不喜欢的工作中，变化是不可避免的接受它。", career_en: "Fear of change keeps you trapped in work you dislike — change is inevitable; accept it.", study: "抗拒进步的脚步只会被淘汰，接受知识更新换代的必然性。", study_en: "Resisting the march of progress only leaves you behind — accept the inevitability of knowledge evolving.", social: "紧抓不再适合的关系不放，你的成长需要更匹配的同行者。", social_en: "Holding on to relationships that no longer fit — your growth requires companions better matched to who you are becoming.", general: "你正在恐惧地抗拒不可避免的变化，越是抓紧过去越会受伤。", general_en: "You are fearfully resisting the unavoidable — the tighter you grip the past, the more it hurts." },
+    upright: { love: "旧有关系模式的终结为新感情腾出空间，勇敢放手迎接蜕变。", career: "一段职业生涯即将结束，这为更适合你的新机会创造了条件。", study: "旧的学习方式已经不适用了，拥抱全新的方法和思维模式。", social: "某些关系自然走到终点，感恩过去然后轻盈地继续前行。", general: "深刻的转变正在发生，松开紧握旧事物的手拥抱全新的开始。" },
+    reversed: { love: "死守已死的关系只会延长痛苦，放手的时刻早已到来。", career: "害怕改变让你困在不喜欢的工作中，变化是不可避免的接受它。", study: "抗拒进步的脚步只会被淘汰，接受知识更新换代的必然性。", social: "紧抓不再适合的关系不放，你的成长需要更匹配的同行者。", general: "你正在恐惧地抗拒不可避免的变化，越是抓紧过去越会受伤。" },
   },
   15: { // Temperance
-    upright: { love: "平和而和谐的关系正在形成，适度的给予与接纳是长久之道。", love_en: "A peaceful, harmonious relationship is taking shape — moderate giving and receiving is the path to lasting love.", career: "在工作中找到节奏和平衡，不急不躁的稳步前进将带来持续成果。", career_en: "Find your rhythm and balance at work — steady, unhurried progress yields enduring results.", study: "平衡学习与休息，劳逸结合才能让知识真正内化为智慧。", study_en: "Balance study with rest — only when effort meets ease does knowledge truly become wisdom.", social: "以温和包容的态度调和不同的人际关系，成为大家的桥梁。", social_en: "Harmonize different relationships with gentleness and tolerance — become the bridge that connects everyone.", general: "一切恰到好处的生活才是真正的幸福，寻找并保持你的平衡点。", general_en: "A life where everything is just right is true happiness — find and maintain your point of balance." },
-    reversed: { love: "关系的失衡让人疲惫，过度付出或过度索取都在伤害彼此。", love_en: "Imbalance in your relationship is exhausting — whether over-giving or over-taking, both are wounding each other.", career: "工作与生活失去了界限，重新调整节奏避免身心耗尽。", career_en: "The boundary between work and life has collapsed — readjust your rhythm before burnout consumes you.", study: "过度用功或极度懈怠都是问题，找到适合自己的学习节奏。", study_en: "Both over-studying and extreme sloth are problems — find the study rhythm that fits you.", social: "人际关系中的过度或不足都让你焦虑，回归适度交往的节奏。", social_en: "Both excess and deficiency in your social life are fueling anxiety — return to a moderate rhythm of connection.", general: "生活正在偏离平衡，审视你在哪里过度又在哪里不足。", general_en: "Your life is drifting out of balance — examine where you are in excess and where you are in deficit." },
+    upright: { love: "平和而和谐的关系正在形成，适度的给予与接纳是长久之道。", career: "在工作中找到节奏和平衡，不急不躁的稳步前进将带来持续成果。", study: "平衡学习与休息，劳逸结合才能让知识真正内化为智慧。", social: "以温和包容的态度调和不同的人际关系，成为大家的桥梁。", general: "一切恰到好处的生活才是真正的幸福，寻找并保持你的平衡点。" },
+    reversed: { love: "关系的失衡让人疲惫，过度付出或过度索取都在伤害彼此。", career: "工作与生活失去了界限，重新调整节奏避免身心耗尽。", study: "过度用功或极度懈怠都是问题，找到适合自己的学习节奏。", social: "人际关系中的过度或不足都让你焦虑，回归适度交往的节奏。", general: "生活正在偏离平衡，审视你在哪里过度又在哪里不足。" },
   },
   16: { // The Devil
-    upright: { love: "觉察关系中不健康的依赖或控制模式，意识是解脱的第一步。", love_en: "Recognize the unhealthy dependency or control patterns in your relationship — awareness is the first step toward liberation.", career: "对金钱或地位的执念正在奴役你，重新审视什么才是真正的成功。", career_en: "Obsession with money or status is enslaving you — reexamine what true success really means.", study: "对成绩的执念让你失去学习的乐趣，放下焦虑享受求知本身。", study_en: "Fixation on grades is stealing the joy of learning — release the anxiety and enjoy the pursuit of knowledge itself.", social: "警惕那些让你感到被束缚的人际关系，你有权选择离开。", social_en: "Be wary of relationships that make you feel trapped — you have the right to walk away.", general: "意识到你正被什么束缚和限制，黑暗中的觉知就是光明。", general_en: "Become conscious of what binds and limits you — awareness in the darkness is itself the light." },
-    reversed: { love: "挣脱了有毒的关系模式，你正在恢复自己的力量和自由。", love_en: "You are breaking free from toxic relationship patterns — your power and freedom are returning.", career: "摆脱对物质成就的执念，找到真正让你感到充实的工作意义。", career_en: "Release the obsession with material achievement — find the work that truly fills your soul.", study: "释放对完美成绩的焦虑，学习本该是探索而非负担。", study_en: "Free yourself from the anxiety of perfect grades — learning should be exploration, not a burden.", social: "从不良关系中解脱出来，重获自由的感觉让你如获新生。", social_en: "Freed from unhealthy relationships, the sensation of reclaimed liberty makes you feel reborn.", general: "你正在挣脱枷锁重获自由，阴暗的力量正在失去对你的掌控。", general_en: "You are breaking your chains and reclaiming your freedom — the shadow's grip on you is weakening." },
+    upright: { love: "觉察关系中不健康的依赖或控制模式，意识是解脱的第一步。", career: "对金钱或地位的执念正在奴役你，重新审视什么才是真正的成功。", study: "对成绩的执念让你失去学习的乐趣，放下焦虑享受求知本身。", social: "警惕那些让你感到被束缚的人际关系，你有权选择离开。", general: "意识到你正被什么束缚和限制，黑暗中的觉知就是光明。" },
+    reversed: { love: "挣脱了有毒的关系模式，你正在恢复自己的力量和自由。", career: "摆脱对物质成就的执念，找到真正让你感到充实的工作意义。", study: "释放对完美成绩的焦虑，学习本该是探索而非负担。", social: "从不良关系中解脱出来，重获自由的感觉让你如获新生。", general: "你正在挣脱枷锁重获自由，阴暗的力量正在失去对你的掌控。" },
   },
   17: { // The Tower
-    upright: { love: "关系中的虚假结构正在崩塌，虽然痛苦但真相将让你获得自由。", love_en: "False structures in your relationship are collapsing — painful as it is, the truth will set you free.", career: "职场中的突然变动是重建的契机，旧的不去新的不来。", career_en: "Sudden upheaval at work is an opportunity for rebuilding — the old must go before the new can arrive.", study: "原有的知识体系受到冲击，这恰恰是认知升级的最好时机。", study_en: "Your existing knowledge framework is being shaken — this is precisely the best moment for a cognitive upgrade.", social: "某些建立在脆弱基础上的人际关系面临考验，经历风雨方见真情。", social_en: "Relationships built on fragile foundations are being tested — only through storms do you see which bonds are true.", general: "突变的冲击虽然剧烈，但它正在清除不再适合你的一切。", general_en: "The shock of sudden change is intense, but it is clearing away everything that no longer suits you." },
-    reversed: { love: "明知关系即将崩溃却拼命维持，拖延只会让最终的破裂更痛苦。", love_en: "You know the relationship is crumbling yet you cling desperately — delaying only makes the final break more painful.", career: "预感到职业危机却不敢行动，勇敢面对比被动等待崩塌要好。", career_en: "You sense a career crisis coming but dare not act — facing it bravely is better than passively waiting for the collapse.", study: "逃避学习中的根本问题，拖延只会让最后的补救更加困难。", study_en: "Avoiding the fundamental problems in your studies — procrastination only makes the eventual rescue harder.", social: "在摇摇欲坠的关系中苦苦支撑，有些崩塌其实是解脱的开始。", social_en: "Desperately propping up a crumbling relationship — some collapses are actually the beginning of liberation.", general: "你正在恐惧中试图阻止不可避免的改变，有时候推倒才能重建。", general_en: "You are fearfully trying to stop the unstoppable — sometimes you must tear down before you can rebuild." },
+    upright: { love: "关系中的虚假结构正在崩塌，虽然痛苦但真相将让你获得自由。", career: "职场中的突然变动是重建的契机，旧的不去新的不来。", study: "原有的知识体系受到冲击，这恰恰是认知升级的最好时机。", social: "某些建立在脆弱基础上的人际关系面临考验，经历风雨方见真情。", general: "突变的冲击虽然剧烈，但它正在清除不再适合你的一切。" },
+    reversed: { love: "明知关系即将崩溃却拼命维持，拖延只会让最终的破裂更痛苦。", career: "预感到职业危机却不敢行动，勇敢面对比被动等待崩塌要好。", study: "逃避学习中的根本问题，拖延只会让最后的补救更加困难。", social: "在摇摇欲坠的关系中苦苦支撑，有些崩塌其实是解脱的开始。", general: "你正在恐惧中试图阻止不可避免的改变，有时候推倒才能重建。" },
   },
   18: { // The Star
-    upright: { love: "疗愈后新的爱情希望正在闪耀，相信美好的缘分正在向你靠近。", love_en: "After healing, new hope in love is shining bright — trust that a beautiful connection is drawing near.", career: "灵感迸发对未来充满希望，追随内心的光芒寻找真正热爱的事业。", career_en: "Inspiration surges and hope for the future abounds — follow your inner light toward work you truly love.", study: "学习进入豁然开朗的阶段，灵感和领悟如星光般照亮前路。", study_en: "Your studies have entered a phase of sudden clarity — inspiration and insight illuminate the path like starlight.", social: "以开放和真诚吸引志同道合的人，你的光芒自然会引来同频的灵魂。", social_en: "Attract kindred spirits with openness and sincerity — your light naturally draws souls of the same frequency.", general: "希望之光照亮了前路，经历了风雨后你正迎来宁静与疗愈的时光。", general_en: "The light of hope illuminates the road ahead — after the storm, a season of peace and healing awaits you." },
-    reversed: { love: "对爱情失去信心让你看不到身边的机会，重拾希望的种子从小事开始。", love_en: "Lost faith in love blinds you to the opportunities around you — plant small seeds of hope and begin again.", career: "职业方向上的迷茫感挥之不去，重新连接你最初的梦想和热情。", career_en: "A fog of career confusion refuses to lift — reconnect with your earliest dreams and passions.", study: "学习上的挫折让你怀疑自己，找回信念相信自己可以做到。", study_en: "Academic setbacks have made you doubt yourself — recover the belief that you are capable.", social: "对人际关系的失望让你自我封闭，但希望不会抛弃愿意相信的人。", social_en: "Disappointment in relationships has made you withdraw — but hope never abandons those who still choose to believe.", general: "短暂的低落遮蔽了你的光芒，信心和希望才是你最需要的良药。", general_en: "A brief low has dimmed your radiance — faith and hope are the remedies you need most." },
+    upright: { love: "疗愈后新的爱情希望正在闪耀，相信美好的缘分正在向你靠近。", career: "灵感迸发对未来充满希望，追随内心的光芒寻找真正热爱的事业。", study: "学习进入豁然开朗的阶段，灵感和领悟如星光般照亮前路。", social: "以开放和真诚吸引志同道合的人，你的光芒自然会引来同频的灵魂。", general: "希望之光照亮了前路，经历了风雨后你正迎来宁静与疗愈的时光。" },
+    reversed: { love: "对爱情失去信心让你看不到身边的机会，重拾希望的种子从小事开始。", career: "职业方向上的迷茫感挥之不去，重新连接你最初的梦想和热情。", study: "学习上的挫折让你怀疑自己，找回信念相信自己可以做到。", social: "对人际关系的失望让你自我封闭，但希望不会抛弃愿意相信的人。", general: "短暂的低落遮蔽了你的光芒，信心和希望才是你最需要的良药。" },
   },
   19: { // The Moon
-    upright: { love: "感情中的迷雾让你看不清真相，相信直觉而非被表面现象迷惑。", love_en: "Fog in your love life obscures the truth — trust your intuition rather than being deceived by surface appearances.", career: "职场中的隐藏信息和潜在变数值得警惕，谨慎行事等待迷雾散去。", career_en: "Hidden information and lurking variables at work warrant caution — proceed carefully and wait for the mist to clear.", study: "困惑和不安是学习过程的一部分，穿越未知地带就能抵达更深的理解。", study_en: "Confusion and unease are part of the learning journey — pass through the unknown to reach deeper understanding.", social: "人际关系中存在未言明的暗流，用心观察而非妄下结论。", social_en: "Unspoken undercurrents run beneath your social interactions — observe carefully rather than jumping to conclusions.", general: "你正行走在潜意识的迷宫中，相信内在的指引会带你走向黎明。", general_en: "You are walking through the labyrinth of the subconscious — trust your inner guidance to lead you toward dawn." },
-    reversed: { love: "迷雾正在散去真相逐渐清晰，你终于看清了关系中的真实状况。", love_en: "The fog is lifting and the truth is emerging — at last you see the real state of your relationship clearly.", career: "职场中的隐藏问题浮出水面，面对它们比继续逃避更有助于你。", career_en: "Hidden workplace issues are surfacing — facing them serves you far better than continued avoidance.", study: "之前困扰你的学习难题开始变得清晰，困惑正被理解取代。", study_en: "The problems that plagued your studies are becoming clear — confusion is yielding to understanding.", social: "人际中的误会和猜疑正在消散，诚实的沟通将澄清一切。", social_en: "Misunderstandings and suspicions in your relationships are dissolving — honest communication will clarify everything.", general: "恐惧和迷惑正在消退，你已穿越最黑暗的时刻黎明就在前方。", general_en: "Fear and confusion are receding — you have passed through the darkest hour, and dawn lies just ahead." },
+    upright: { love: "感情中的迷雾让你看不清真相，相信直觉而非被表面现象迷惑。", career: "职场中的隐藏信息和潜在变数值得警惕，谨慎行事等待迷雾散去。", study: "困惑和不安是学习过程的一部分，穿越未知地带就能抵达更深的理解。", social: "人际关系中存在未言明的暗流，用心观察而非妄下结论。", general: "你正行走在潜意识的迷宫中，相信内在的指引会带你走向黎明。" },
+    reversed: { love: "迷雾正在散去真相逐渐清晰，你终于看清了关系中的真实状况。", career: "职场中的隐藏问题浮出水面，面对它们比继续逃避更有助于你。", study: "之前困扰你的学习难题开始变得清晰，困惑正被理解取代。", social: "人际中的误会和猜疑正在消散，诚实的沟通将澄清一切。", general: "恐惧和迷惑正在消退，你已穿越最黑暗的时刻黎明就在前方。" },
   },
   20: { // The Sun
-    upright: { love: "感情充满温暖和喜悦，这是享受甜蜜和表达真心的大好时光。", love_en: "Your love life overflows with warmth and joy — this is a wonderful time to savor sweetness and speak your heart.", career: "职业成就和认可即将到来，你的才华正被看见并得到应有的回报。", career_en: "Career achievement and recognition are on their way — your talents are being seen and duly rewarded.", study: "学习充满热情和成就感，清晰的头脑让知识吸收事半功倍。", study_en: "Learning is filled with enthusiasm and fulfillment — a clear mind doubles your absorption of knowledge.", social: "以真诚和开朗感染身边的每一个人，你就是人群中的阳光。", social_en: "Infect everyone around you with sincerity and warmth — you are the sunshine in any gathering.", general: "阳光普照一切顺遂，享受这段充满活力和幸福感的美好时光。", general_en: "The sun shines and all flows smoothly — enjoy this beautiful season of vitality and happiness." },
-    reversed: { love: "暂时的阴霾遮蔽了感情的温暖，但太阳从未消失只是被云遮住了。", love_en: "A passing cloud has veiled the warmth in your relationship — but the sun has not vanished, it is only hidden.", career: "成就感和热情暂时减退，重新连接你最初选择这份工作的原因。", career_en: "Your sense of achievement and passion has temporarily dimmed — reconnect with why you chose this work in the first place.", study: "学习动力不足让你感到沮丧，找回让你眼睛发光的求知理由。", study_en: "Low motivation is getting you down — rediscover the reason that once made your eyes light up for learning.", social: "社交热情减退是正常的，给自己一些安静充电的时间。", social_en: "A dip in social energy is entirely normal — give yourself some quiet time to recharge.", general: "短暂的阴云不会永远停留，你的内在阳光很快会重新闪耀。", general_en: "The passing clouds will not linger forever — your inner sun will soon shine again." },
+    upright: { love: "感情充满温暖和喜悦，这是享受甜蜜和表达真心的大好时光。", career: "职业成就和认可即将到来，你的才华正被看见并得到应有的回报。", study: "学习充满热情和成就感，清晰的头脑让知识吸收事半功倍。", social: "以真诚和开朗感染身边的每一个人，你就是人群中的阳光。", general: "阳光普照一切顺遂，享受这段充满活力和幸福感的美好时光。" },
+    reversed: { love: "暂时的阴霾遮蔽了感情的温暖，但太阳从未消失只是被云遮住了。", career: "成就感和热情暂时减退，重新连接你最初选择这份工作的原因。", study: "学习动力不足让你感到沮丧，找回让你眼睛发光的求知理由。", social: "社交热情减退是正常的，给自己一些安静充电的时间。", general: "短暂的阴云不会永远停留，你的内在阳光很快会重新闪耀。" },
   },
   21: { // Judgement
-    upright: { love: "过去的感情经验让你更加成熟，现在是时候做出觉醒的真心选择。", love_en: "Past experiences in love have matured you — now is the time to make an awakened, heartfelt choice.", career: "一个重要的职业召唤正在唤醒你，回应内心真正的使命感和热情。", career_en: "A significant career calling is awakening you — answer the true sense of mission and passion within.", study: "过往的知识积累正在融会贯通，你将到达全新的认知高度。", study_en: "All your accumulated knowledge is synthesizing — you are about to reach an entirely new level of understanding.", social: "修复旧有关系或释怀过往的时机到了，真诚的和解带来释放。", social_en: "The time has come to mend old bonds or release the past — sincere reconciliation brings liberation.", general: "觉醒的号角已经吹响，回顾过往整合经验走向更高层次的自己。", general_en: "The call to awaken has sounded — review your past, integrate its lessons, and rise to a higher version of yourself." },
-    reversed: { love: "不愿从过往的感情中吸取教训，重复的模式只会带来重复的伤害。", love_en: "Unwilling to learn from past relationships, repeating patterns bring only repeated wounds.", career: "拒绝回应内心的职业召唤，逃避使命只会带来更深的空虚感。", career_en: "Refusing to answer your inner career calling — evading your mission only brings deeper emptiness.", study: "对学习中的反馈充耳不闻，不接受检视就无法取得真正的进步。", study_en: "Deaf to the feedback your studies offer — without honest self-examination, genuine progress is impossible.", social: "执著于旧怨不肯释怀，放不下的只有你自己在受罪。", social_en: "Clinging to old grudges and refusing to let go — the only one suffering from your grip is you.", general: "你在逃避内心的召唤和自我检视，觉醒虽然痛苦却是成长的必经之路。", general_en: "You are evading your inner calling and self-examination — awakening is painful, yet it is the essential path of growth." },
+    upright: { love: "过去的感情经验让你更加成熟，现在是时候做出觉醒的真心选择。", career: "一个重要的职业召唤正在唤醒你，回应内心真正的使命感和热情。", study: "过往的知识积累正在融会贯通，你将到达全新的认知高度。", social: "修复旧有关系或释怀过往的时机到了，真诚的和解带来释放。", general: "觉醒的号角已经吹响，回顾过往整合经验走向更高层次的自己。" },
+    reversed: { love: "不愿从过往的感情中吸取教训，重复的模式只会带来重复的伤害。", career: "拒绝回应内心的职业召唤，逃避使命只会带来更深的空虚感。", study: "对学习中的反馈充耳不闻，不接受检视就无法取得真正的进步。", social: "执著于旧怨不肯释怀，放不下的只有你自己在受罪。", general: "你在逃避内心的召唤和自我检视，觉醒虽然痛苦却是成长的必经之路。" },
   },
   22: { // The World
-    upright: { love: "一段感情圆满成熟进入新阶段，或是美好的新缘分即将完美呈现。", love_en: "A relationship reaches fulfillment and enters a new stage — or a beautiful new connection is about to manifest perfectly.", career: "一个重要的职业周期圆满结束，你已准备好迈向更广阔的新舞台。", career_en: "A major career cycle is coming to a satisfying close — you are ready to step onto a larger stage.", study: "学业或技能达到阶段性的圆满成就，为自己的坚持和成长庆祝。", study_en: "Your studies or skills have reached a milestone of completion — celebrate your persistence and growth.", social: "在人际关系中找到归属感和完整感，你与世界的连接和谐美好。", social_en: "You have found belonging and wholeness in your relationships — your connection to the world is harmonious and beautiful.", general: "一个重要的生命阶段圆满落幕，带着满满的收获迎接崭新的循环。", general_en: "A significant life chapter comes to a fulfilling close — carry your abundant harvest into the new cycle ahead." },
-    reversed: { love: "总觉得关系中缺了什么，在向外寻找之前先完善自己内心的拼图。", love_en: "You sense something missing in your relationship — complete your own inner puzzle before searching outside.", career: "接近目标却迟迟无法完成，检查还有什么未完成的功课需要处理。", career_en: "So close to the goal yet unable to finish — check what unresolved lessons still need your attention.", study: "学业上差最后一步未能圆满，坚持完成这最后的一段路。", study_en: "One final step remains before academic completion — persevere through this last stretch.", social: "在世界中感到格格不入，寻找真正让你有归属感的社群和连接。", social_en: "Feeling out of place in the world — seek the community and connections where you truly belong.", general: "你几乎就要完成一个重要的阶段了，别在最后一刻放弃。", general_en: "You are so close to completing a major phase — do not give up at the final moment." },
+    upright: { love: "一段感情圆满成熟进入新阶段，或是美好的新缘分即将完美呈现。", career: "一个重要的职业周期圆满结束，你已准备好迈向更广阔的新舞台。", study: "学业或技能达到阶段性的圆满成就，为自己的坚持和成长庆祝。", social: "在人际关系中找到归属感和完整感，你与世界的连接和谐美好。", general: "一个重要的生命阶段圆满落幕，带着满满的收获迎接崭新的循环。" },
+    reversed: { love: "总觉得关系中缺了什么，在向外寻找之前先完善自己内心的拼图。", career: "接近目标却迟迟无法完成，检查还有什么未完成的功课需要处理。", study: "学业上差最后一步未能圆满，坚持完成这最后的一段路。", social: "在世界中感到格格不入，寻找真正让你有归属感的社群和连接。", general: "你几乎就要完成一个重要的阶段了，别在最后一刻放弃。" },
+  },
+  // ===== MINOR ARCANA: WANDS (23-36) =====
+  23: { // Ace of Wands
+    upright: { love: "一股火热的吸引力正在萌芽，勇敢主动一点，别让这火花熄灭。", career: "一个充满潜力的新机会正在召唤你，抓住这份热情立刻行动。", study: "对新领域的求知欲正在点燃，趁热打铁开启你的学习计划。", social: "你散发的热忱会吸引志同道合的新朋友，主动开启对话。", general: "一股全新的创造能量正在升起，对眼前的冲动说「是」。" },
+    reversed: { love: "热情来得快去得也快，先想清楚这是真心还是三分钟热度。", career: "好点子被搁置或半途而废，找出是什么浇灭了你最初的干劲。", study: "学习热情正在冷却，重新找到当初让你兴奋的那个理由。", social: "别因一时的冷淡而封闭自己，火花还在，只是需要再添把柴。", general: "初始的冲劲遇到了阻碍，移开那些让火焰窒息的杂物。" },
+  },
+  24: { // Two of Wands
+    upright: { love: "你正站在感情的十字路口，是时候为这段关系规划更远的未来。", career: "放眼长远规划你的职业蓝图，带着勇气迈向未知的疆域。", study: "为学业设定更远的目标，把眼光从眼前投向未来的方向。", social: "考虑拓展你的社交版图，新的连接正在更远的地方等你。", general: "世界在你手中展开，带着远见规划下一步，勇敢离开熟悉之地。" },
+    reversed: { love: "对未来的不确定让你在感情里裹足不前，迈过那扇已经打开的门。", career: "计划停留在纸面上迟迟没有落地，克服对未知的恐惧迈出第一步。", study: "迟迟不愿开始新的学习方向，别让对未知的顾虑困住你的脚步。", social: "对新关系抱着防备让你错过很多，试着先伸出你的手。", general: "对未知的恐惧把你困在太小的世界里，穿越那道你已经打开的门。" },
+  },
+  25: { // Three of Wands
+    upright: { love: "你之前的用心经营正在开花，耐心等待这段关系带来的好消息。", career: "你之前的付出正迎来回报，远方的机会正在向你靠近。", study: "你种下的努力正在远方结出果实，坚持就能看到成果。", social: "你拓展的人脉正带来回响，保持开放迎接新的连结。", general: "你的船正在入港，之前的冒险是对的，静候远方的收获。" },
+    reversed: { love: "感情进展比预期缓慢，别灰心，稍微调整方式就好。", career: "计划在关键处卡住，愿景没错，只是执行方式需要微调。", study: "努力暂时看不到成果，调整方法并保持耐心，果实仍在路上。", social: "关系的进展有些延迟，耐心一点，真诚终会得到回应。", general: "交付被推迟了，别急着放弃，你的船仍在大海上向你驶来。" },
+  },
+  26: { // Four of Wands
+    upright: { love: "感情进入稳定甜蜜的庆祝期，享受这份归属与心安。", career: "一个阶段圆满收官，值得庆祝，也为你下一步蓄满动力。", study: "阶段性的成果值得庆祝，这份喜悦会支撑你继续前进。", social: "与朋友或家人的欢聚让你重获力量，珍惜这些温暖的连结。", general: "工作之后的庆祝时刻到了，这份喜悦是你继续前行的燃料。" },
+    reversed: { love: "表面的甜蜜之下可能藏着未解决的矛盾，别急着庆功。", career: "成果看起来很美但根基不稳，检查你到底建在什么之上。", study: "阶段性的成就感有些空洞，回头巩固你真正的基础。", social: "热闹过后有些落寞，别用社交的喧嚣掩盖内心的空虚。", general: "过早的庆祝会让你忽视潜在的问题，先确认地基是否稳固。" },
+  },
+  27: { // Five of Wands
+    upright: { love: "关系里的小摩擦其实是磨合，借冲突看清彼此真实的需求。", career: "观点碰撞虽然激烈，但最强的方案会从中胜出，参与而非退缩。", study: "不同学习思路的碰撞是好事，越辩越明，找到最适合你的方法。", social: "良性的竞争能激发彼此的活力，别把分歧当成针对。", general: "冲突的混乱自有其意义，最强的愿景会在碰撞后浮现。" },
+    reversed: { love: "为小事争吵只会消耗彼此，先分辨什么才真正值得计较。", career: "无谓的内耗让你精疲力尽，避免卷入没有产出的争斗。", study: "别在无关紧要的细节上纠缠，把精力留给真正重要的难点。", social: "因害怕冲突而一味回避并不健康，找到值得坚持的底线。", general: "没有目的的争吵正在耗尽你的能量，找到真正值得为之战的事物。" },
+  },
+  28: { // Six of Wands
+    upright: { love: "你的真诚与付出终于被看见，勇敢接受这份认可与回应。", career: "你的成绩赢得了众人的认可，坦然接受属于你的桂冠。", study: "你的进步有目共睹，这份肯定值得你骄傲，继续乘胜追击。", social: "你在人群中的光芒被看见，大方接受赞美并分享你的喜悦。", general: "来之不易的胜利属于你，坦然接受荣誉，因为你配得上。" },
+    reversed: { love: "得不到回应让你有些失落，别把自我价值绑在别人的认可上。", career: "成果被忽视或认可迟迟不来，先充实内在，别只追逐外在掌声。", study: "别总盯着成绩和名次，回归学习本身带来的踏实成长。", social: "渴望被夸赞让你有些用力过猛，真实的你本身就值得被喜欢。", general: "这场胜利有些空洞，内在的成就感比外界的掌声更持久。" },
+  },
+  29: { // Seven of Wands
+    upright: { love: "这段感情值得你为它挺身而出，坚定地捍卫你的立场。", career: "你占据有利位置但正面临挑战，坚守你的立场不要退缩。", study: "坚持你的学习方法与节奏，别被外界的质疑轻易动摇。", social: "面对质疑和反对，用勇气和真诚维护你珍视的关系。", general: "这是你信念的实战考验，带着恐惧也要勇敢行动。" },
+    reversed: { love: "你在这段感情里感到孤立无援，先想清楚这段坚守还值不值得。", career: "反对声压得你喘不过气，重新判断你捍卫的立场是否还成立。", study: "外界的压力让你怀疑自己，选好真正值得坚持的战场。", social: "与太多人对抗让你疲惫不堪，学会分清主次再出手。", general: "被反对势力压倒时，选择你的战场，而不是处处硬扛。" },
+  },
+  30: { // Eight of Wands
+    upright: { love: "感情进展突然加速，别想太多，顺应这份顺流而下的心动。", career: "停滞的事务突然开始流动，抓住这个高速推进的好时机。", study: "学习进入快车道，趁这股势头一鼓作气攻克难点。", social: "讯息和邀约纷至沓来，别犹豫，及时回应这份流动。", general: "停滞的事物正迅速流动，别过度思考，让动能带着你走。" },
+    reversed: { love: "消息延迟或误会频发，先放慢脚步，别让冲动说出伤人的话。", career: "信息混乱导致方向散乱，暂停一下，瞄准目标再发力。", study: "手忙脚乱反而效率低下，理清优先级再逐一击破。", social: "沟通上的误会正在堆积，慢下来把话说清楚。", general: "箭没有射中目标，暂停、瞄准，然后再释放。" },
+  },
+  31: { // Nine of Wands
+    upright: { love: "你曾在感情里受过伤却依然勇敢，你的伤痕正是你的底气。", career: "你已疲惫但依然坚韧，再坚持一下，胜利就在眼前。", study: "坚持到这里你已足够强大，别在最后一关前放弃。", social: "你的经历让你更懂得理解他人，用你的坚韧成为他人的支撑。", general: "你很累但你仍站着，这是受伤疗愈者的时刻，再推最后一步。" },
+    reversed: { love: "你已经在感情里撑了太久，放下防备，允许自己休息和求助。", career: "你已接近崩溃边缘，别硬扛，学会寻求支持。", study: "紧绷太久反而学不进去，先休息，恢复状态再出发。", social: "拒绝求助是你的骄傲在作祟，卸下盾牌去接受关心。", general: "战斗太久没有喘息，放下盾牌，先让自己愈合。" },
+  },
+  32: { // Ten of Wands
+    upright: { love: "这段感情让你背了太多不属于你的重担，学会分清责任。", career: "你扛得太多已经超负荷，学会授权和排序，放下不属于你的。", study: "课业压力让你不堪重负，拆解任务，别一个人硬撑。", social: "你总是替别人扛事，学会设限，别让付出压垮自己。", general: "你背上了超出承受的重担，目的地已近，放下不属于你的部分。" },
+    reversed: { love: "感情的重量已经把你压垮，放手不是失败，而是自救。", career: "长期超负荷已让你倦怠，释放那些从来不该你背的担子。", study: "压力大到让你想放弃，先卸下不必要的要求，再轻装前行。", social: "你背负了太多他人的期待，放下这些，找回自己的节奏。", general: "重担已经压垮了你，释放是一种生存，而不是失败。" },
+  },
+  33: { // Page of Wands
+    upright: { love: "带着孩子般的好奇去爱，享受这段新鲜又充满可能的心动。", career: "对新项目充满热情，先别担心是否精通，让兴奋带你入门。", study: "对新知识充满好奇，趁热打铁，让兴趣带你进入未知。", social: "你这份真诚的热情很有感染力，大胆去认识新朋友。", general: "一个充满希望的新开始，带着初学者的热情迈入未知。" },
+    reversed: { love: "心动很多却没有方向，别把三分钟热度当成真爱。", career: "好点子被过早放弃，挑一个火花，专注地把它养大。", study: "兴趣广泛却浅尝辄止，选一个方向深入下去。", social: "话说得多做得少，把热情落到实处，关系才会真正建立。", general: "火焰存在却没有方向，挑一个火花，用心喂养它。" },
+  },
+  34: { // Knight of Wands
+    upright: { love: "带着热烈与真诚勇敢追求所爱，但记得给彼此留些余地。", career: "以满满的冲劲向前推进，大胆行动，同时用策略调和激情。", study: "学习热情高涨、行动力十足，趁势而上攻克目标。", social: "你的魅力和活力能点燃全场，勇敢地走进人群。", general: "带着激情的目的向前冲锋，大胆、冒险，但别忘策略。" },
+    reversed: { love: "冲动会烧毁关系的桥梁，别让一时上头说出无法挽回的话。", career: "热情有余而方向不足，先想清楚再行动，别挑起收不了场的摊子。", study: "三分钟热度让你难以深耕，慢下来把一件事做扎实。", social: "莽撞的言行容易得罪人，克制冲动，多为对方想一想。", general: "冲动正在烧毁桥梁，放慢你的马。" },
+  },
+  35: { // Queen of Wands
+    upright: { love: "用你的温暖和魅力经营感情，真诚自信的你最有吸引力。", career: "以自信和魅力领导团队，用你的真实感染并带动他人。", study: "带着热情与自信投入学习，你自会闪闪发光。", social: "你散发的温暖与魅力让人不自觉地靠近，做那个照亮他人的人。", general: "你是创造之火的辉煌女王，以你的魅力与真实去领导。" },
+    reversed: { love: "别让嫉妒和不安全感主导你，你值得被爱，不需要乞求关注。", career: "自我怀疑让你失去光芒，重新找回属于你的自信与主权。", study: "别因比较而气馁，你的节奏和天赋独一无二。", social: "需要感让你在关系里患得患失，先稳住自己再与人相处。", general: "火焰转成了自我怀疑，夺回你的主权。" },
+  },
+  36: { // King of Wands
+    upright: { love: "以成熟和有远见的方式去爱，用榜样的力量经营这段关系。", career: "你是有远见的领导者，用目标引导热情，激励身边每个人。", study: "以长远眼光规划学习，你的专注与热忱能成就一番事业。", social: "用你的远见与热忱凝聚人心，成为值得追随的榜样。", general: "你是能从火花建造帝国的领袖，用目标引导创造之火。" },
+    reversed: { love: "强势的控制欲会伤害亲密，学会倾听而非一味主导。", career: "别用恐吓代替领导，真正的权威来自尊重而非压迫。", study: "好高骛远不如脚踏实地，先把眼前的功课做扎实。", social: "别把强势当成魅力，懂得倾听才能赢得真正的人心。", general: "火焰变成了暴政，学会领导，否则让位。" },
+  },
+
+  // ===== MINOR ARCANA: CUPS (37-50) =====
+  37: { // Ace of Cups
+    upright: { love: "一股全新的爱意正在涌出，敞开心扉，深深饮下这份心动。", career: "对工作的热爱正在回归，让这份热忱引领你开启新篇章。", study: "对知识的渴望如泉涌出，趁这份热忱开始新的学习。", social: "你的温柔和真诚能融化隔阂，向他人敞开心扉。", general: "心灵的泉源正在满溢，这是一场伟大情感的开始。" },
+    reversed: { love: "你下意识封闭了心门，先面对内心的堵塞，爱才能流动。", career: "对工作的热情枯竭，先找出是什么让你的心变得干涸。", study: "学习的动力被压抑，翻转过那只看不见的杯子。", social: "对他人关闭心扉让你孤立，试着先对自己温柔一点。", general: "本应丰盈之处是空无，把倒扣的杯子翻转过来。" },
+  },
+  38: { // Two of Cups
+    upright: { love: "两个灵魂正在彼此认出，一段深刻的连接正在形成。", career: "一段理想的合作或伙伴关系正在成形，珍惜这份默契。", study: "找到与你同频的学习伙伴，一起进步会事半功倍。", social: "一段真诚的友谊正在建立，用心经营这份相知。", general: "两个灵魂在相互认出中相遇，祝福这份结合。" },
+    reversed: { love: "关系里付出与回报失衡，一次诚实的对话是解药。", career: "合作建立在误解而非真实之上，坦诚沟通才能走远。", study: "别只依赖搭档而失去独立，先厘清你自己的目标。", social: "关系里的误会需要坦诚化解，别让猜疑越积越深。", general: "关系失衡了，诚实的对话是良药。" },
+  },
+  39: { // Three of Cups
+    upright: { love: "感情进入甜蜜欢庆的时刻，和伴侣一起分享这份喜悦。", career: "团队合作默契十足，一起庆祝共同的成果吧。", study: "和伙伴一起学习更有动力，互相扶持共同进步。", social: "这是属于友情与欢聚的时刻，你并不孤单。", general: "共享庆祝的喜悦，你并不孤单于你的快乐或悲伤。" },
+    reversed: { love: "过度的热闹掩盖了感情里的裂痕，静下来看看真实的关系。", career: "团队里的排挤或拉帮结派正在制造隔阂，审视圈子的动力。", study: "聚会过多反而分心，平衡好玩乐与学习。", social: "小圈子正在排斥而非包容，检视你身处的圈子是否健康。", general: "聚会滑向过度，检视你圈子的动力。" },
+  },
+  40: { // Four of Cups
+    upright: { love: "你对眼前的爱习以为常，别忽略了伴侣已经递出的真心。", career: "对现状的厌倦让你看不到眼前的机会，那朵云正是你的老师。", study: "对学习提不起劲，重新看见那些一直摆在面前的资源。", social: "你把自己封闭起来，却忘了有人正默默关心你。", general: "灵魂的倦怠让你对已有之物不感恩，云是你的老师。" },
+    reversed: { love: "迷雾正在散去，你开始看见一直摆在眼前的真心。", career: "你对工作的新热情正在回归，捡起你曾拒绝的机会。", study: "从倦怠中醒来，重新投入你一度冷落的学习。", social: "你愿意重新与世界连接了，接受那些向你伸出的手。", general: "迷雾正在升起，拿起你曾拒绝的圣杯。" },
+  },
+  41: { // Five of Cups
+    upright: { love: "感情的失落让你悲伤，但别忘了身后仍有值得珍惜的部分。", career: "一次挫折让你只看到失去，转身看看还有哪些资源仍在。", study: "一次失利不代表全部，看见你仍保有的基础和优势。", social: "别让一次失望封闭你，转身看看依然守在你身边的人。", general: "悲伤是神圣的，转身也是，看见你仍拥有的。" },
+    reversed: { love: "悲伤正在过去，你开始转向希望，温柔地回归生活。", career: "走出挫败的阴影，重新看见那些依然可行的路。", study: "从失利中恢复，把注意力放回你能改变的部分。", social: "你愿意重新打开心门，接受身边人的安慰与陪伴。", general: "剧痛正在消退，温柔地回到生活。" },
+  },
+  42: { // Six of Cups
+    upright: { love: "一段旧日的缘分或回忆带来温暖，带着童心接纳这份馈赠。", career: "过去的经验成为你今天的礼物，借鉴它开启新的可能。", study: "温故而知新，从旧知识里找到新的启发。", social: "老友重逢或旧情复燃带来治愈，珍惜这份纯真的连接。", general: "怀旧的甜美正送来一份过去的礼物，用儿童张开的手去接。" },
+    reversed: { love: "别沉溺于旧情，过去已成过去，未来正在更响地呼唤你。", career: "别用过去的辉煌或挫败困住自己，向前看。", study: "别用老方法或旧心态面对新问题，更新你的学习方式。", social: "紧抓着旧关系不放，不如转身迎接更适合你的同行者。", general: "怀旧成了牢笼，未来比记忆更响亮地呼唤你。" },
+  },
+  43: { // Seven of Cups
+    upright: { love: "感情里选择很多但真假难辨，用心分辨哪一份才是你真正想要的。", career: "机会很多诱惑也很多，别被表象迷惑，选真正适合你的方向。", study: "学习路径五花八门，辨别哪条才是适合你长期坚持的。", social: "别被表面的热闹或人设迷惑，看清谁是真正值得深交的人。", general: "幻想太多真假难辨，辨别力是你此刻需要的。" },
+    reversed: { love: "幻象正在消散，你开始看清这段感情的真实面貌。", career: "从眼花缭乱的选择中清醒，聚焦真正属于你的方向。", study: "从分心中走出来，明确你真正想要学习的目标。", social: "看清了谁是真心谁是逢场作戏，及时取舍。", general: "迷雾正在散去，区分幻想与真正的渴望。" },
+  },
+  44: { // Eight of Cups
+    upright: { love: "这段感情已不再滋养你，勇敢离开，去追寻内心真正的满足。", career: "现有的工作已无法让你成长，是时候告别旧轨道重新出发。", study: "旧的学习方式已到尽头，转向更能滋养你的方向。", social: "有些关系已不再滋养你，平静告别，去寻更契合的同行者。", general: "走开，离开不再滋养你的一切，即使它曾经滋养过。" },
+    reversed: { love: "你明知该离开却不断找理由留下，别让恐惧困住你。", career: "害怕未知让你困在熟悉的空虚里，勇敢跨出那一步。", study: "明知方向不对却不愿改变，别让惯性耽误你的成长。", social: "你在一段消耗的关系里舍不得走，离开是为了更好地活。", general: "你不断找理由留下，圣杯仍是空的。" },
+  },
+  45: { // Nine of Cups
+    upright: { love: "感情美满如愿，尽情享受这份甜蜜与满足。", career: "你期待的成果正一一实现，享受这份来之不易的满足。", study: "你的努力换来了理想的成绩，好好享受这份成就感。", social: "你的真诚收获了温暖的关系，尽情享受这份喜悦。", general: "愿望之牌，尽情享受你创造的丰盛。" },
+    reversed: { love: "愿望实现了却没带来预期的幸福，回头检视你真正渴望的是什么。", career: "拥有了很多却仍感空虚，问问自己真正看重的是什么。", study: "成绩达标了却不满足，检视你学习的初衷。", social: "热闹过后内心空落，别用表面的热闹填补真正的孤独。", general: "愿望成真却没带来快乐，检视愿望本身。" },
+  },
+  46: { // Ten of Cups
+    upright: { love: "感情走向圆满与归属，享受这份心安与长久的爱。", career: "工作与生活和谐圆满，珍惜这份难得的平衡。", study: "学业与生活相互滋养，在安稳中继续成长。", social: "你拥有真挚温暖的关系，享受这份深层的归属感。", general: "情感的圆满，心灵真正在家的平和。" },
+    reversed: { love: "理想中的幸福与现实有落差，正视问题并用心修补。", career: "表面的和谐掩盖了深层矛盾，别只维持表面。", study: "你想要的成绩和现实有距离，脚踏实地去拉近它。", social: "关系里藏着未说开的裂痕，坦诚沟通才能修复。", general: "彩虹触不可及，愿景是真的，路径需要修缮。" },
+  },
+  47: { // Page of Cups
+    upright: { love: "一段纯真而温柔的心动正在萌芽，用心聆听内心的讯息。", career: "一个充满灵感的创意正在浮现，别急着否定它。", study: "以初学者之心学习，直觉会带你发现新的领悟。", social: "用真诚和想象力去连接他人，你温柔的一面很有魅力。", general: "心灵的梦幻初学者，以初学者的耳朵去聆听。" },
+    reversed: { love: "别把恋爱本身当成爱情，脚踏实地面对真实的情感。", career: "灵感停留在幻想里没有落地，把梦想安放在实践之中。", study: "想法很多却不动手，把想象转化为实际的行动。", social: "情感上有些幼稚，学着在关系中更成熟地表达。", general: "把梦想安放在实践之中。" },
+  },
+  48: { // Knight of Cups
+    upright: { love: "一位温柔浪漫的追求者正带着真心而来，接受这份心意。", career: "一个充满美感与热情的提案正摆在你面前，接受它但检查细节。", study: "带着热情与理想投入学习，让热爱引领你。", social: "你的浪漫与真诚让人如沐春风，用真心去打动他人。", general: "浪漫的理想主义者带来一份心意，接收但检查细节。" },
+    reversed: { love: "甜言蜜语背后未必是真心，别被表面的浪漫冲昏头。", career: "华丽的方案缺乏实质，看清本质再做决定。", study: "梦想多于行动，把才华落实到真正的作品上。", social: "别被空洞的魅惑吸引，识人看本质而非表象。", general: "空洞的魅力，本质重于风格。" },
+  },
+  49: { // Queen of Cups
+    upright: { love: "用深沉的共情去爱，你的温柔能治愈对方也治愈自己。", career: "以细腻的洞察和共情处理工作，你的体贴是独特的优势。", study: "用心感受知识的温度，你的直觉会带你深入理解。", social: "你的共情让他人愿意敞开心扉，做一个安全的倾听者。", general: "情感领域的共情女王，以在场而非分析看进灵魂。" },
+    reversed: { love: "你吸收了太多情绪而快要被淹没，先保护好自己再爱人。", career: "过度的共情让你疲惫不堪，设立边界才能持续付出。", study: "情绪化的状态干扰了学习，先安顿好内心再投入。", social: "别成为他人苦难的容器，边界能保护你的天赋。", general: "情感的淹没，边界保护你的天赋。" },
+  },
+  50: { // King of Cups
+    upright: { love: "以成熟稳定的情绪去爱，你的从容是这段关系最稳的锚。", career: "在风浪中保持冷静与智慧，你的情绪掌控力就是领导力。", study: "以平和沉稳的心态面对学习，深度来自稳定的专注。", social: "你的平静让人安心，成为他人可以信赖的港湾。", general: "以平静智慧而非波动来统治的情绪大师。" },
+    reversed: { love: "别用冷静的外表掩饰真实感受，坦诚的情绪才是连接。", career: "表面的平静下藏着操控，真诚比手段更持久。", study: "别把情绪压抑得太深，感受本身也是一种信息。", social: "过度克制让你显得疏离，适当表达真实的情感。", general: "感受不是脆弱，它是信息。" },
+  },
+
+  // ===== MINOR ARCANA: SWORDS (51-64) =====
+  51: { // Ace of Swords
+    upright: { love: "一段清醒的对话将拨开迷雾，用坦诚的沟通切穿误会。", career: "一个关键的想法或突破即将到来，用清晰的判断果断行动。", study: "豁然开朗的时刻到了，清晰的思路让你事半功倍。", social: "用真诚直接的语言化解隔阂，真相能拉近彼此。", general: "真理的双刃剑带来突破，以正直去运用它。" },
+    reversed: { love: "别把语言当成武器，伤人的话一旦出口就难以收回。", career: "清晰的判断被情绪遮蔽，先冷静下来再做决定。", study: "思维陷入混乱，先理清思路再开始学习。", social: "犀利的话语可能伤人，善意比逞口舌之快更重要。", general: "被误用的真理，恐惧遮蔽了清晰。" },
+  },
+  52: { // Two of Swords
+    upright: { love: "你在一段感情里左右为难，答案藏在你暂时沉默的心里。", career: "面临艰难的选择，光靠理智无法决定，听听内心的声音。", study: "在两条学习路径间犹豫不决，先静下来感受哪个更适合你。", social: "一段关系让你陷入两难，别再用逃避来维持表面的平衡。", general: "优柔寡断的僵局，答案在你暂时沉默的心里。" },
+    reversed: { love: "你被迫看见一直回避的真相，这个决定不能再拖了。", career: "拖延已久的抉择到了必须面对的时候，早做决定早解脱。", study: "别再回避选方向，即使选错也能学到东西。", social: "掩盖的矛盾即将浮出水面，与其拖延不如坦诚面对。", general: "蒙眼的布正在滑落，释放僵局。" },
+  },
+  53: { // Three of Swords
+    upright: { love: "心被深深刺痛，悲伤是真实的，但它不是无意义的。", career: "一次令人痛苦的挫折或背叛让你受伤，允许自己难过。", study: "一次失利像针一样刺痛你，痛过之后看清问题所在。", social: "一段关系的背叛让你心碎，别压抑这份真实的情感。", general: "悲伤与背叛，但剑正刺入你心被铠甲保护的地方。" },
+    reversed: { love: "伤口正在愈合，别急着抹去痛苦，让它慢慢过去。", career: "最痛的时候正在过去，从挫折中慢慢恢复。", study: "从失利中渐渐走出来，别压抑，允许自己慢慢好起来。", social: "被伤害的痛正在缓解，给彼此时间慢慢和解。", general: "急性疼痛正在消退，心灵通过感受而愈合。" },
+  },
+  54: { // Four of Swords
+    upright: { love: "感情需要一段安静期，退一步休息，让彼此都喘口气。", career: "精神疲惫需要休息，这是战略性的撤退而非逃避。", study: "大脑需要喘息，适当休息才能更好地吸收知识。", social: "给自己一段独处的时间，安静充电后再回到人群。", general: "必要的撤退，心智在寂静中愈合。" },
+    reversed: { love: "你已平静太久，是时候主动一点，温柔地回到关系里。", career: "休息够了就该行动，别让「休息」变成逃避的借口。", study: "从停滞中醒来，重新拾起你搁置已久的学习。", social: "别再用独处回避必要的交流，慢慢走出来。", general: "躁动阻止了恢复，温柔地起身。" },
+  },
+  55: { // Five of Swords
+    upright: { love: "别为了赢而伤感情，问问这场胜利是否值得你失去的。", career: "你赢了一时却输了人心，评估这场争斗的真正代价。", study: "别为了一时的成绩压过别人，真正的进步不需要踩低他人。", social: "争强好胜让你赢了争论输了关系，学会适可而止。", general: "以关系为代价的空洞胜利，问问值不值得。" },
+    reversed: { love: "冲突过后是和解的时刻，放下执念，为这段关系留条后路。", career: "从失败的争斗中吸取教训，谦卑不是羞辱。", study: "别让一次输赢打击你，从失败中学习并调整方法。", social: "主动迈出和解的一步，修复比较劲更重要。", general: "冲突的余波，学习并以不同的方式前进。" },
+  },
+  56: { // Six of Swords
+    upright: { love: "你正离开一段艰难的感情，带着仅存的温暖驶向平静的彼岸。", career: "你正平稳地驶离困境，带着经验前往更好的环境。", study: "你正从混乱中过渡到更清晰的状态，相信这段跨越。", social: "离开消耗你的环境，带着真诚去往更懂你的人身边。", general: "渡过汹涌水域驶向平静，信任这趟跨越。" },
+    reversed: { love: "你困在过去的感情里无法靠岸，学会放下才能真正离开。", career: "你迟迟无法离开旧环境，别让惯性绑住你的脚步。", study: "旧的学习方式已不适用，别拒绝下船迎接新的方法。", social: "你已到了新环境却不愿融入，放下过去才能被接纳。", general: "无法靠岸，船已完成它的使命。" },
+  },
+  57: { // Seven of Swords
+    upright: { love: "有些事需要策略性地处理，但别让隐瞒伤害了信任。", career: "用巧妙的策略达成目标，有时低调比硬碰更有效。", study: "灵活的学习方法能帮你事半功倍，找到适合自己的捷径。", social: "有时以退为进是智慧，但别让算计盖过了真诚。", general: "策略性的撤退，胜利有时需要隐秘。" },
+    reversed: { love: "隐瞒被揭穿会重创信任，坦诚即使迟了也好过没有。", career: "你的小聪明可能反噬，回到诚实和坦荡的轨道上。", study: "别走捷径抄近路，扎实的基础才经得起考验。", social: "算计被看穿会失去人心，真诚才是长久之道。", general: "窃贼被抓住，正直即使迟了也好过没有。" },
+  },
+  58: { // Eight of Swords
+    upright: { love: "你被自己的顾虑困住了，其实束缚是松的，你可以走出来。", career: "限制性的想法正在困住你，真正的牢笼是那个眼罩。", study: "你觉得自己学不会，但真正的障碍是自我设限。", social: "别让羞怯和自我怀疑困住你，你比你想象的更自由。", general: "心智的牢笼，真正的监狱是遮眼布。" },
+    reversed: { love: "你看清了很多束缚是自己设的，勇敢走出这段自我设限。", career: "束缚开始松动，你意识到很多限制可以突破。", study: "摘下自我设限的眼罩，你会发现学习并不像想象中那么难。", social: "你从自我封闭中走出来，重新连接外面的世界。", general: "遮眼布被取下，你一直都能走出来。" },
+  },
+  59: { // Nine of Swords
+    upright: { love: "深夜的焦虑让你辗转难眠，那些担忧只是想法，不是现实。", career: "你对工作的担忧被放大了，别让最坏设想折磨自己。", study: "考试前的焦虑让你难以入睡，你的恐惧是想法而非预言。", social: "过度在意他人看法让你焦虑，别用想象折磨自己。", general: "凌晨的惊醒，墙上的剑是你自己的想法。" },
+    reversed: { love: "最焦虑的时候正在过去，你看清那些担忧只是臆想。", career: "压在心头的恐惧正在松动，别把臆想当成现实。", study: "焦虑退去后你重新找回状态，迎向黎明。", social: "从社交焦虑中缓过来，你比自己以为的更受欢迎。", general: "最坏的时候已过，寻找黎明。" },
+  },
+  60: { // Ten of Swords
+    upright: { love: "这段感情走到了痛彻心扉的终点，但黎明前最暗，结束后就是重生。", career: "一次彻底的失败让你跌到谷底，看地平线，黑暗正在升起。", study: "一次惨败像最后一击，但这也是你重新开始的机会。", social: "一段关系的结束让你痛苦，但别回头，最暗处已过。", general: "最后一击，但这是黎明前最暗的时刻。" },
+    reversed: { love: "你已熬过最痛的时刻，伤口正在愈合，别再回头。", career: "最艰难的时期已经过去，你正在慢慢站起来。", study: "从失败中恢复，把注意力放回前进的方向。", social: "你从创伤中走出，愿意重新信任并连接他人。", general: "你已幸存并开始站起，勿回头。" },
+  },
+  61: { // Page of Swords
+    upright: { love: "带着好奇心去了解对方，多提问、多倾听，真相会拉近你们。", career: "保持好奇和敏锐，多问多学，知识就是你的优势。", study: "以批判性思维去探索，提问和钻研会让理解更深。", social: "真诚的好奇让你更懂他人，多倾听会让关系更近。", general: "好奇的知识分子，真相爱追寻者。" },
+    reversed: { love: "别用刻薄的言语伤人，把聪明用在理解而非挑剔上。", career: "别把挑剔当犀利，少一点批判多一点行动。", study: "分析太多却迟迟不行动，先做起来再优化。", social: "犬儒和毒舌会推开别人，善意比聪明更讨人喜欢。", general: "用智识当盾牌的批评家，少想多做。" },
+  },
+  62: { // Knight of Swords
+    upright: { love: "勇敢说出你的真心，但表达时别太锋利，给彼此留余地。", career: "以果断和效率推进，行动要快，但别伤了沿途的人。", study: "以饱满的冲劲攻克难题，快速行动，保持专注。", social: "有话直说是优点，但注意方式，真诚不等于伤人。", general: "心智战士，快速行动但别践踏无辜。" },
+    reversed: { love: "冲动的话像刀一样伤人，慢下来，别让情绪主导表达。", career: "莽撞的行动会带来麻烦，先想清楚再出手。", study: "急功近利反而事倍功半，放慢脚步把基础打牢。", social: "攻击性的言语正在伤害关系，学会在表达前先换位思考。", general: "鲁莽的冲锋已变成横冲直撞，慢下来。" },
+  },
+  63: { // Queen of Swords
+    upright: { love: "以清醒的眼光看待这段感情，说出真相比甜言蜜语更珍贵。", career: "你的洞察力能一眼看穿本质，用智慧和正直做出判断。", study: "以清晰的思维梳理知识，你敏锐的判断力是宝贵的天赋。", social: "你的真诚与洞察让人信赖，说出真相本身就是一种温柔。", general: "明晰洞察的女王，真相就是它的安慰。" },
+    reversed: { love: "别用冷淡伪装坚强，柔软一点并不会失去你的锋芒。", career: "犀利的话语可能伤人不自知，温和与清晰并不冲突。", study: "别对自己太苛刻，学习需要耐心而非冰冷的自我批判。", social: "受伤后你把自己武装得太紧，试着卸下一点防备。", general: "伪装成清晰的冷漠，柔软而不失锋锐。" },
+  },
+  64: { // King of Swords
+    upright: { love: "以理性和真诚经营感情，成熟的心智是关系最稳的支撑。", career: "以公正和理性领导，你的判断力会赢得信任与尊重。", study: "以严谨的逻辑梳理知识，把所学真正内化为智慧。", social: "你的公正与清醒让人信服，成为值得信赖的智者。", general: "智识权威的君王，将知识整合入智慧。" },
+    reversed: { love: "别让理性变成冷漠，用心去感受比用脑分析更重要。", career: "别用逻辑去操控他人，公正若没有慈悲就是冷酷。", study: "别被死板的框架困住，让思维保持开放和灵活。", social: "过于理智让你显得疏离，适时流露真实的情感。", general: "逻辑的暴君，用心来想。" },
+  },
+
+  // ===== MINOR ARCANA: PENTACLES (65-78) =====
+  65: { // Ace of Pentacles
+    upright: { love: "一段踏实而长久的关系正在生根，用心经营这份真实。", career: "一个实实在在的新机会正在到来，抓住这份可以落地的开始。", study: "投入的每一分努力都会在现实里结出果实，脚踏实地开始。", social: "一段真实可靠的关系正在建立，用真心浇灌这份连接。", general: "物质显化的种子，一切财富始于注意力的土壤。" },
+    reversed: { love: "别错过眼前真实的心意，也别被表面的光鲜迷惑。", career: "一个机会可能被忽略，谨慎评估，别被「愚人金」迷惑。", study: "基础还没打牢就先别急着求成，先把土壤准备好。", social: "别轻信那些虚有其表的人，看清谁才是真诚可靠的。", general: "被忽略的机会，土壤尚未准备好。" },
+  },
+  66: { // Two of Pentacles
+    upright: { love: "平衡感情与生活的节奏，这是舞蹈不是危机，灵活一点。", career: "你正同时应对多项任务，调整节奏，适应并保持流动。", study: "平衡各科与生活，别把学习变成负担，保持弹性的节奏。", social: "协调好不同的人际关系，用灵活的智慧处理多线连接。", general: "生活的杂耍者，这是舞蹈不是危机。" },
+    reversed: { love: "你顾此失彼，感情和生活都失衡了，停下来重新排序。", career: "过度承诺让你应接不暇，先厘清什么才是真正重要的。", study: "手忙脚乱却效率低下，先停下来理清优先级。", social: "关系多而不精，别让应酬耗尽自己，学会取舍。", general: "平衡失败，停下来评估什么才真正必要。" },
+  },
+  67: { // Three of Pentacles
+    upright: { love: "一起经营这段感情，像共同建造一座教堂，携手成就更好的彼此。", career: "团队协作和精湛手艺正被看见，与志同道合者共建事业。", study: "与伙伴协作学习会事半功倍，向有经验的人请教。", social: "真诚的合作能建立深厚关系，找到与你标准一致的人。", general: "大师级建造者，与共享你标准的人共事。" },
+    reversed: { love: "感情里缺乏真正的协作，别一个人扛，也别敷衍了事。", career: "协作不畅或作品粗糙，放下骄傲，学会求助和配合。", study: "闭门造车让你停滞不前，主动求助并接受反馈。", social: "孤独的坚持未必是骄傲，学会在关系中相互成就。", general: "粗劣之作，孤独中的骄傲仍是骄傲。" },
+  },
+  68: { // Four of Pentacles
+    upright: { love: "别抓得太紧，爱需要流动，适度的安全感胜过紧紧的掌控。", career: "谨慎理财是对的，但别让过度保守困住你的发展。", study: "守住已学的知识很好，但也别抗拒吸收新的内容。", social: "别把关系攥得太紧，给对方空间，关系才能呼吸。", general: "囤积者的紧握，你在守着什么想要流动的东西？" },
+    reversed: { love: "你开始松开紧抓的手，让爱自由流动，也让自己解脱。", career: "固守的执念正在放下，适当的放手反而带来新的可能。", study: "放下对结果的执念，让学习本身变得轻松流动。", social: "你愿意打开自己了，金钱与情感都需要流动才鲜活。", general: "紧握正在松开，打开你的双手。" },
+  },
+  69: { // Five of Pentacles
+    upright: { love: "你感到被冷落和孤独，但帮助就在身边，别让骄傲把你留在门外。", career: "财务或职业上的困难让你焦虑，但出路就在眼前，别独自硬扛。", study: "学习遇到困难别羞于求助，身边其实有资源可用。", social: "你感到被排斥，但有人愿意伸出援手，放下骄傲去接受。", general: "被留在寒冷中的感觉，你的骄傲是唯一让你留在外面之物。" },
+    reversed: { love: "最冷的时刻已经过去，你愿意接受温暖和帮助了。", career: "困境正在好转，接受那些向你伸出的援手。", study: "走出低谷，你愿意求助并重新找回学习的信心。", social: "从孤立中走出来，重新连接那些一直愿意帮你的人。", general: "教堂的门正在打开，接受被献上的。" },
+  },
+  70: { // Six of Pentacles
+    upright: { love: "在感情里给予与接受保持平衡，带着尊重付出，带着尊严接受。", career: "你或他人正慷慨相助，公平的往来会带来双赢。", study: "互相帮助、分享资源会让大家都进步，别吝啬也别不懂求助。", social: "你的慷慨会带来温暖，但施与受都要有分寸。", general: "慷慨的流动，带着尊重给予，带着尊严接收。" },
+    reversed: { love: "感情里的付出与回报失衡，审视这背后是否藏着控制。", career: "施予或索取失了分寸，厘清其中的权力关系。", study: "别把帮助变成依赖，也别让给予变成控制。", social: "你的慷慨可能带着附加条件，真诚的给予不该有交换。", general: "天平倾斜，慈善也可以是控制的一种形式。" },
+  },
+  71: { // Seven of Pentacles
+    upright: { love: "感情需要耐心经营，你已付出真心，剩下的交给时间。", career: "你已投入很多努力，现在是等待收获的阶段，别急着拔苗助长。", study: "你的积累正在慢慢见效，耐心等待，别半途而废。", social: "真诚的关系需要时间沉淀，别急于求成。", general: "暂停评估的园丁，别挖起种子去查看它们是否在生长。" },
+    reversed: { love: "对感情进展失去耐心让你想放弃，但树还活着，重新评估别舍弃。", career: "投入没换来预期回报让你沮丧，别急着放弃，调整后再看。", study: "努力暂时看不到结果，别否定自己，重新评估方法。", social: "对关系的投入感到不值，别草率放弃，给它一点时间。", general: "对结果的不耐烦，树仍活着，重新评估而非放弃。" },
+  },
+  72: { // Eight of Pentacles
+    upright: { love: "用心打磨这段感情，日复一日的投入会让爱日益深厚。", career: "精进你的手艺，卓越来自持续的练习而非偶然。", study: "一点一滴地积累技能，重复练习会让你越来越强。", social: "用心经营每一段关系，真诚的付出会沉淀出深厚的情谊。", general: "工作中的学徒，工作本身就是奖赏。" },
+    reversed: { love: "这段感情让你感到单调疲惫，找回当初让你心动的理由。", career: "重复的劳动让你麻木，别让手艺变成苦工。", study: "学习变成了应付，找回你最初学习的热情。", social: "对关系的付出让你倦怠，停下来找回连接的意义。", general: "苦工，记住你为何开始。" },
+  },
+  73: { // Nine of Pentacles
+    upright: { love: "你独立而美好，先学会享受自己的陪伴，爱会不请自来。", career: "你已凭努力建起一片天地，享受劳动果实，不必愧疚。", study: "你积累的成果让你从容自信，为自己的坚持骄傲。", social: "你的自洽与优雅让人欣赏，享受高质量的独处与交往。", general: "花园中的女子，毫无愧疚地享受劳动的果实。" },
+    reversed: { love: "独立久了也会孤独，别让精致的花园变成镀金牢笼。", career: "你的成就可能让你有些孤立，别忘了连接与分享。", study: "独自苦学让你疲惫，适当地交流会让收获更完整。", social: "自给自足背后的孤独需要被看见，财富没有连接就是贫穷。", general: "镀金牢笼，没有连接的财富是丝缎中的贫穷。" },
+  },
+  74: { // Ten of Pentacles
+    upright: { love: "这段感情有着长远的意义，一起经营会结出代代相传的果实。", career: "你在打造一份能长久传承的事业，用长远的眼光去经营。", study: "你学到的会成为受益一生的根基，为长远的目标深耕。", social: "家庭的温暖与传承是你的底气，珍惜这份稳固的连结。", general: "传承之牌，你在建造将比你更持久之物。" },
+    reversed: { love: "家庭或过往的牵绊成了负担，必要时建立属于自己的生活。", career: "传承的压力或旧有模式束缚了你，走出一条自己的路。", study: "别被既定的期待框住，找到属于你自己的方向。", social: "家族的牵绊让你喘不过气，不是拒绝，而是为了真正的成长。", general: "家族树根部可能已腐烂，建立你自己的。" },
+  },
+  75: { // Page of Pentacles
+    upright: { love: "以认真和踏实的态度去爱，现在用心经营的会回报你终身。", career: "一个新的务实机会正等着你，认真学、踏实做。", study: "现在打下的基础会让你终身受益，踏实学习一项技能。", social: "你的真诚和上进会吸引可靠的朋友，认真经营每段关系。", general: "物质世界的勤奋学生，现在学的会支付终身红利。" },
+    reversed: { love: "对感情不够上心，别让马虎错过真正值得的人。", career: "对机会不够专注，别让拖延和粗心浪费掉好机会。", study: "学习上拖延散漫，把注意力拉回到真正重要的目标上。", social: "对关系的疏忽会让人失望，用心对待那些在乎你的人。", general: "缺乏专注，钱币掉落的和捧起的一样频繁。" },
+  },
+  76: { // Knight of Pentacles
+    upright: { love: "用稳定和可靠去爱，细水长流的付出胜过一时冲动。", career: "以踏实和坚持推进，慢而稳的你终会抵达目标。", study: "一步一个脚印地学习，坚持比速度更能带你走远。", social: "你的可靠让人安心，成为朋友眼中值得托付的人。", general: "稳定而有条不紊的工作者，可靠就是超能力。" },
+    reversed: { love: "你把停滞误当成了稳定，别让害怕改变困住这段感情。", career: "你已原地踏步太久，别让一成不变变成一种逃避。", study: "用旧方法学新东西只会停滞，试着改变一下节奏。", social: "别让封闭和固执阻碍了你，马可以走，你呢？", general: "伪装成耐心的停滞，马可以移动。" },
+  },
+  77: { // Queen of Pentacles
+    upright: { love: "用细腻和温暖去照顾这段感情，你的滋养让爱茁壮成长。", career: "你懂得真正的富足包含温度与美感，用你的方式创造价值。", study: "在舒适而踏实的状态里学习，让身心一起成长。", social: "你的关怀让身边的人都感到被滋养，你是一个温暖的存在。", general: "在每个层面滋养生命的女王，真正的财富包括美与舒适。" },
+    reversed: { love: "别把自我价值都押在物质和外在，真正的亲密需要灵魂的连接。", career: "别让对物质的焦虑主导你，外在成就之外还有更重要的。", study: "别为了成绩或认可而学，找回学习本身的意义。", social: "别用物质去填补关系的空洞，真诚的连接无法被替代。", general: "对物质的过度认同，身体与灵魂并非分离。" },
+  },
+  78: { // King of Pentacles
+    upright: { love: "以成熟和担当去爱，你给的安稳是这段感情最坚实的依靠。", career: "你的稳健和正直赢得了丰盛，把资源用在真正有价值的地方。", study: "以务实和坚持积累知识，把所学转化为真正的能力。", social: "你的慷慨和可靠让人信赖，成为他人可以依靠的后盾。", general: "物质丰盛的大师，丰盛不是积累而是管理。" },
+    reversed: { love: "别用物质去衡量爱，感情里的真诚比任何财富都珍贵。", career: "别让财富成为唯一目标，拥有再多也别忘了为何而活。", study: "别只盯着回报，学习本身带来的成长更持久。", social: "别用地位和金钱去维系关系，真心才是长久之道。", general: "没有智慧的财富，繁荣必须服务于生命。" },
   },
 };

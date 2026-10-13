@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TarotCard } from '../../data/tarotData';
+import { getSpread, type SpreadId } from '../../config/spreads';
 
 interface DrawStageProps {
+  spread: SpreadId;
   availableCards: TarotCard[];
   selectedCards: { card: TarotCard; isReversed: boolean }[];
   onSelectCard: (card: TarotCard) => void;
@@ -54,13 +56,13 @@ function useResponsiveLayout() {
 }
 
 export function DrawStage({
-  availableCards, selectedCards,
+  spread, availableCards, selectedCards,
   onSelectCard,
 }: DrawStageProps) {
   const { t } = useTranslation();
   const { cardsPerRow, rows, cardW, cardH, rowH, yOffset, gap, isMobile, gridH } = useResponsiveLayout();
 
-  const positionLabels = [t('positionPast'), t('positionPresent'), t('positionFuture')];
+  const spreadDef = getSpread(spread);
 
   const selectedIds = new Set(selectedCards.map(sc => sc.card.id));
 
@@ -95,7 +97,7 @@ export function DrawStage({
         className="text-goldAura/60 text-center mb-2 md:mb-3 text-xs md:text-sm"
         style={{ fontFamily: "'Cinzel', serif" }}
       >
-        {t('drawProgress', { count: selectedCards.length })}
+        {t('drawProgress', { count: selectedCards.length, total: spreadDef.cardCount })}
       </motion.p>
 
       <motion.p
@@ -108,9 +110,9 @@ export function DrawStage({
 
       {/* Selection slots */}
       <div className="flex gap-3 md:gap-10 mb-1 md:mb-6 pointer-events-none">
-        {[0, 1, 2].map((slotIndex) => (
+        {spreadDef.positions.map((pos, slotIndex) => (
           <motion.div
-            key={slotIndex}
+            key={pos.key}
             className="relative w-20 h-28 md:w-32 md:h-48 rounded-lg border-2 border-dashed border-goldAura/30
                        flex flex-col items-center justify-center bg-mysticPurple/20 pointer-events-auto"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -118,7 +120,7 @@ export function DrawStage({
             transition={{ delay: 0.1 + slotIndex * 0.1 }}
           >
             <span className="absolute bottom-2 md:bottom-3 left-0 right-0 text-center text-goldAura/40 text-[10px] md:text-[11px] font-bold tracking-widest z-0 pointer-events-none">
-              {positionLabels[slotIndex]}
+              {pos.label}
             </span>
             {selectedCards[slotIndex] ? (
               <motion.div

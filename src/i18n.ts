@@ -3,98 +3,11 @@ import { initReactI18next } from 'react-i18next';
 
 // UI strings for both languages
 const resources = {
-  en: {
-    translation: {
-      // App title
-      appTitle: 'Arcana Veil',
-      appSubtitle: '秘境塔罗',
-
-      // Auth Stage
-      authTitle: 'Unveil the Tapestry of Fate',
-      authSubtitle: 'Awaken spiritual perception to begin your journey',
-      authSubtitleMouse: 'Enter the veil and uncover your fate',
-      authButton: 'Begin Journey',
-
-      // Intention Stage
-      intentionTitle: 'What area would you like to inquire about?',
-      intentionLove: 'Love & Relationships',
-      intentionCareer: 'Career & Wealth',
-      intentionStudy: 'Study & Growth',
-      intentionSocial: 'Social & Family',
-      intentionGeneral: 'General Guidance',
-      authPermissionRequest: 'Requesting permission...',
-      authPermissionDenied: 'Camera access denied. Please enable it in your browser settings.',
-
-      // Shuffle Stage
-      shuffleTitle: '命运之轮转动',
-      shuffleInstruction: 'Point your index finger to awaken the cards',
-      shuffleStopHint: 'Hover your finger to stop the shuffle',
-      shuffleButton: 'Shuffle the Cards',
-      shuffleInProgress: 'In the chaos, the threads of fate are realigning...',
-      shuffleKeepGoing: 'Keep circling to channel energy...',
-      shuffleCanStop: 'Hold your finger still to stop',
-      shuffleComplete: 'The arrangement is complete...',
-
-      // Draw Stage
-      drawTitle: 'Choose Your Fate',
-      drawInstruction: 'Hold your finger over a card to select it',
-      drawInstructionMouse: 'Click a card to select it',
-      drawSlot: 'Slot {{number}}',
-      drawCardSelected: 'Card selected',
-      edgeSwipeHint: 'Swipe down to close',
-      drawProgress: '{{count}} / 3 cards chosen',
-
-      // Reveal Stage
-      revealTitle: 'Your Fate Revealed',
-      revealPast: 'Past',
-      revealPresent: 'Present',
-      revealFuture: 'Future',
-      revealLoading: 'The spirits are writing...',
-
-      // Actions
-      restart: 'Reshape Fate',
-      export: 'Capture Stars',
-      exporting: 'Capturing...',
-
-      // Status
-      statusTracking: 'Hand Tracking',
-      statusConnected: 'Connected',
-      statusDisconnected: 'Disconnected',
-      statusDetecting: 'Detecting hand...',
-      statusHandDetected: 'Hand detected',
-      statusLost: 'Tracking lost',
-
-      // Errors
-      errorCamera: 'Camera Error',
-      errorTracking: 'Tracking Error',
-      errorGeneric: 'Something went wrong...',
-
-      // Gestures
-      gesturePointing: 'Point your finger',
-      gestureCircle: 'Draw a circle',
-      gestureCircleHint: 'Draw circle to shuffle',
-      gestureStationaryHint: 'Hold still to stop',
-      gestureSelecting: 'Selecting...',
-
-      // Card positions
-      positionPast: 'Past',
-      positionPresent: 'Present',
-      positionFuture: 'Future',
-
-      // Orientation
-      upright: 'Upright',
-      reversed: 'Reversed',
-
-      // Interaction modes
-      modeMouse: 'Click/Tap',
-      modeGesture: 'Gesture',
-    }
-  },
   zh: {
     translation: {
       // App title
       appTitle: '秘境塔罗',
-      appSubtitle: 'Arcana Veil',
+      appSubtitle: '沉浸式塔罗占卜',
 
       // Auth Stage
       authTitle: '揭开命运帷幕',
@@ -111,6 +24,10 @@ const resources = {
       intentionGeneral: '整体运势',
       authPermissionRequest: '正在请求权限...',
       authPermissionDenied: '摄像头访问被拒绝，请在浏览器设置中启用。',
+
+      // Spread Stage
+      spreadTitle: '选择你的牌阵',
+      spreadSubtitle: '不同的牌阵，映照命运的不同切面',
 
       // Shuffle Stage
       shuffleTitle: '命运之轮转动',
@@ -129,7 +46,7 @@ const resources = {
       drawSlot: '第 {{number}} 张',
       drawCardSelected: '已选择',
       edgeSwipeHint: '向下滑动，收起牌面',
-      drawProgress: '已选 {{count}} / 3 张牌',
+      drawProgress: '已选 {{count}} / {{total}} 张牌',
 
       // Reveal Stage
       revealTitle: '命运揭示',
